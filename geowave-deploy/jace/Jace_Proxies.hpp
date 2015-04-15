@@ -8,6 +8,7 @@
 #include "jace/proxy/types/JLong.h"
 #include "jace/proxy/types/JShort.h"
 
+#include "jace/proxy/java/lang/Boolean.h"
 #include "jace/proxy/java/lang/Class.h"
 #include "jace/proxy/java/lang/Double.h"
 #include "jace/proxy/java/lang/Float.h"
@@ -39,6 +40,7 @@
 #include "jace/proxy/com/vividsolutions/jts/geom/Coordinate.h"
 #include "jace/proxy/com/vividsolutions/jts/geom/Envelope.h"
 #include "jace/proxy/com/vividsolutions/jts/geom/Geometry.h"
+#include "jace/proxy/com/vividsolutions/jts/geom/GeometryCollection.h"
 #include "jace/proxy/com/vividsolutions/jts/geom/GeometryFactory.h"
 #include "jace/proxy/com/vividsolutions/jts/geom/LineString.h"
 #include "jace/proxy/com/vividsolutions/jts/geom/MultiLineString.h"
@@ -52,6 +54,7 @@
 #include "jace/proxy/org/opengis/feature/type/AttributeDescriptor.h"
 #include "jace/proxy/org/opengis/feature/type/AttributeType.h"
 #include "jace/proxy/org/opengis/feature/type/GeometryDescriptor.h"
+#include "jace/proxy/org/opengis/feature/type/GeometryType.h"
 #include "jace/proxy/org/opengis/feature/type/Name.h"
 #include "jace/proxy/org/opengis/filter/Filter.h"
 
@@ -62,6 +65,7 @@
 #include "jace/proxy/mil/nga/giat/geowave/accumulo/metadata/AccumuloDataStatisticsStore.h"
 #include "jace/proxy/mil/nga/giat/geowave/index/ByteArrayId.h"
 #include "jace/proxy/mil/nga/giat/geowave/store/CloseableIterator.h"
+#include "jace/proxy/mil/nga/giat/geowave/store/GeometryUtils.h"
 #include "jace/proxy/mil/nga/giat/geowave/store/adapter/DataAdapter.h"
 #include "jace/proxy/mil/nga/giat/geowave/store/adapter/WritableDataAdapter.h"
 #include "jace/proxy/mil/nga/giat/geowave/store/adapter/statistics/BoundingBoxDataStatistics.h"

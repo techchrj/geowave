@@ -12,6 +12,16 @@ mv $WORKSPACE/geowave-deploy/target/*-geoserver-singlejar.jar $WORKSPACE/geowave
 mvn package -P accumulo-container-singlejar $BUILD_ARGS
 mv $WORKSPACE/geowave-deploy/target/*-accumulo-singlejar.jar $WORKSPACE/geowave-deploy/target/geowave-accumulo.jar
 
+mkdir -p $WORKSPACE/geowave-deploy/target/jace
+
+mvn package -P generate-jace-proxies,linux-amd64-gcc-debug $BUILD_ARGS
+mv $WORKSPACE/geowave-deploy/target/*-jace.jar $WORKSPACE/geowave-deploy/target/jace/geowave-jace.jar
+mv $WORKSPACE/geowave-deploy/target/dependency/jace-core-runtime-*.jar $WORKSPACE/geowave-deploy/target/jace/jace-core-runtime.jar
+tar -czf $WORKSPACE/geowave-deploy/target/jace/jace-linux-amd64-debug.tar.gz $WORKSPACE/geowave-deploy/target/jace/geowave-jace.jar $WORKSPACE/geowave-deploy/target/jace/jace-core-runtime.jar $WORKSPACE/geowave-deploy/target/dependency/jace/libjace.so -C $WORKSPACE/geowave-deploy/target/dependency/jace/include
+
+mvn package -P generate-jace-proxies,linux-amd64-gcc-release $BUILD_ARGS
+tar -czf $WORKSPACE/geowave-deploy/target/jace/jace-linux-amd64-release.tar.gz $WORKSPACE/geowave-deploy/target/jace/geowave-jace.jar $WORKSPACE/geowave-deploy/target/jace/jace-core-runtime.jar $WORKSPACE/geowave-deploy/target/dependency/jace/libjace.so -C $WORKSPACE/geowave-deploy/target/dependency/jace/include
+
 cd $WORKSPACE/geowave-types
 mvn package -P ingest-singlejar $BUILD_ARGS
 mv $WORKSPACE/geowave-types/target/*-ingest-tool.jar $WORKSPACE/geowave-types/target/geowave-ingest-tool.jar
