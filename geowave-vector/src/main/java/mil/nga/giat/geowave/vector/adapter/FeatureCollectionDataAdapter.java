@@ -35,6 +35,8 @@ import mil.nga.giat.geowave.store.adapter.PersistentIndexFieldHandler;
 import mil.nga.giat.geowave.store.data.PersistentDataset;
 import mil.nga.giat.geowave.store.data.PersistentValue;
 import mil.nga.giat.geowave.store.data.field.ArrayWriter;
+import mil.nga.giat.geowave.store.data.field.ArrayWriter.StringArrayWriter;
+import mil.nga.giat.geowave.store.data.field.ArrayWriter.VariableSizeObjectArrayWriter;
 import mil.nga.giat.geowave.store.data.field.BasicWriter.StringWriter;
 import mil.nga.giat.geowave.store.data.field.FieldReader;
 import mil.nga.giat.geowave.store.data.field.FieldUtils;
@@ -523,8 +525,7 @@ public class FeatureCollectionDataAdapter extends
 				index.getDimensionalityType(),
 				index.getDataType());
 
-		final ArrayWriter<Object, String> arrayWriter = new ArrayWriter<Object, String>(
-				new StringWriter());
+		final ArrayWriter<Object, String> arrayWriter = new StringArrayWriter();
 
 		ByteArrayId dataId = null;
 		final PersistentDataset<Object> extendedData = new PersistentDataset<Object>();

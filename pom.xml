@@ -100,6 +100,11 @@
 				<version>1.1</version>
 			</dependency>
 			<dependency>
+				<groupId>com.vividsolutions</groupId>
+				<artifactId>jts</artifactId>
+				<version>1.13</version>
+			</dependency>
+			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-api</artifactId>
 				<version>1.6.1</version>
@@ -108,6 +113,11 @@
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-log4j12</artifactId>
 				<version>1.6.1</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-lang3</artifactId>
+				<version>3.1</version>
 			</dependency>
 			<dependency>
 				<groupId>com.google.guava</groupId>
@@ -556,6 +566,7 @@
 		<module>geowave-benchmark</module>
 		<module>geowave-test</module>
 		<module>geowave-examples</module>
+		<module>geowave-cli</module>
 	</modules>
 	<repositories>
 		<repository>
