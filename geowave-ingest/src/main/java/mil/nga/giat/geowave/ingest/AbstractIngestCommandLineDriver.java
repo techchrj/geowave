@@ -84,11 +84,7 @@ abstract public class AbstractIngestCommandLineDriver implements
 		final Options options = new Options();
 		final OptionGroup baseOptionGroup = new OptionGroup();
 		baseOptionGroup.setRequired(false);
-		baseOptionGroup.addOption(new Option(
-				"h",
-				"help",
-				false,
-				"Display help"));
+		baseOptionGroup.addOption(CommandLineUtils.getHelpOption());
 		baseOptionGroup.addOption(new Option(
 				"l",
 				"list",
@@ -107,13 +103,11 @@ abstract public class AbstractIngestCommandLineDriver implements
 			CommandLine commandLine = parser.parse(
 					options,
 					args);
-			if (commandLine.hasOption("h")) {
-				printHelp(
-						options,
-						operation);
-				System.exit(0);
-			}
-			else if (commandLine.hasOption("l")) {
+			CommandLineUtils.parseHelpOption(
+					commandLine,
+					options,
+					operation);
+			if (commandLine.hasOption("l")) {
 				final HelpFormatter formatter = new HelpFormatter();
 				final PrintWriter pw = new PrintWriter(
 						new OutputStreamWriter(
@@ -174,7 +168,7 @@ abstract public class AbstractIngestCommandLineDriver implements
 			LOGGER.fatal(
 					"",
 					e);
-			printHelp(
+			CommandLineUtils.printHelp(
 					options,
 					operation);
 			System.exit(-1);
@@ -208,17 +202,6 @@ abstract public class AbstractIngestCommandLineDriver implements
 			}
 		}
 		return selectedPluginProviders;
-	}
-
-	private static void printHelp(
-			final Options options,
-			final String operation ) {
-		final HelpFormatter formatter = new HelpFormatter();
-		formatter.printHelp(
-				"-" + operation + " <options>",
-				"\nOptions:",
-				options,
-				"");
 	}
 
 	abstract protected void parseOptionsInternal(
