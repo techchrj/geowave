@@ -2,15 +2,9 @@ package mil.nga.giat.geowave.analytic;
 
 import java.io.Serializable;
 
-<<<<<<< HEAD:analytics/api/src/main/java/mil/nga/giat/geowave/analytic/RunnerUtils.java
 import mil.nga.giat.geowave.analytic.param.ParameterEnum;
 import mil.nga.giat.geowave.core.index.ByteArrayUtils;
 import mil.nga.giat.geowave.datastore.accumulo.mapreduce.GeoWaveConfiguratorBase;
-=======
-import mil.nga.giat.geowave.accumulo.mapreduce.GeoWaveConfiguratorBase;
-import mil.nga.giat.geowave.analytics.parameters.ParameterEnum;
-import mil.nga.giat.geowave.index.ByteArrayUtils;
->>>>>>> cd898587ba760187a304d132c25656d7c80bfa8a:geowave-analytics/src/main/java/mil/nga/giat/geowave/analytics/tools/RunnerUtils.java
 
 import org.apache.hadoop.conf.Configuration;
 import org.slf4j.Logger;
