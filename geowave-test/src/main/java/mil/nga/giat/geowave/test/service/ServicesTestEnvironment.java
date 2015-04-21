@@ -160,11 +160,33 @@ abstract public class ServicesTestEnvironment extends
 								new FileInputStream(
 										jettyConfigFile))).configure(jettyServer);
 					}
-
+					final Thread thisThread = Thread.currentThread();
+					jettyServer.addLifeCycleListener(new Listener() {						
+						@Override
+						public void lifeCycleStopping(
+								LifeCycle event ) {}
+						
+						@Override
+						public void lifeCycleStopped(
+								LifeCycle event ) {}
+						
+						@Override
+						public void lifeCycleStarting(
+								LifeCycle event ) {}
+						
+						@Override
+						public void lifeCycleStarted(
+								LifeCycle event ) {
+							thisThread.notifyAll();
+						}
+						
+						@Override
+						public void lifeCycleFailure(
+								LifeCycle event,
+								Throwable cause ) {}
+					});
 					jettyServer.start();
-					while (!jettyServer.isRunning() && !jettyServer.isStarted()) {
-						Thread.sleep(1000);
-					}
+					thisThread.wait();
 
 					// use this to test normal stop behavior, that is, to check
 					// stuff that need to be done on container shutdown (and
