@@ -179,7 +179,9 @@ abstract public class ServicesTestEnvironment extends
 						@Override
 						public void lifeCycleStarted(
 								LifeCycle event ) {
-							thisThread.notifyAll();
+							synchronized(thisThread){
+								thisThread.notifyAll();
+							}
 						}
 						
 						@Override
@@ -188,7 +190,9 @@ abstract public class ServicesTestEnvironment extends
 								Throwable cause ) {}
 					});
 					jettyServer.start();
-					thisThread.wait();
+					synchronized(thisThread){
+						thisThread.wait();
+					}
 
 					// use this to test normal stop behavior, that is, to check
 					// stuff that need to be done on container shutdown (and
