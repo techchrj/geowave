@@ -16,6 +16,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import javax.xml.stream.XMLStreamException;
 
+import mil.nga.giat.geowave.geotime.IndexType;
 import mil.nga.giat.geowave.index.ByteArrayId;
 import mil.nga.giat.geowave.ingest.GeoWaveData;
 import mil.nga.giat.geowave.ingest.hdfs.mapreduce.IngestWithMapper;
@@ -25,7 +26,6 @@ import mil.nga.giat.geowave.store.adapter.WritableDataAdapter;
 import mil.nga.giat.geowave.store.data.field.FieldVisibilityHandler;
 import mil.nga.giat.geowave.store.data.visibility.GlobalVisibilityHandler;
 import mil.nga.giat.geowave.store.index.Index;
-import mil.nga.giat.geowave.store.index.IndexType;
 import mil.nga.giat.geowave.types.AbstractSimpleFeatureIngestPlugin;
 import mil.nga.giat.geowave.types.CQLFilterOptionProvider;
 import mil.nga.giat.geowave.vector.adapter.FeatureDataAdapter;

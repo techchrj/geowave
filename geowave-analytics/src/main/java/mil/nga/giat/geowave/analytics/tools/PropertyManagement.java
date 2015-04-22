@@ -15,12 +15,12 @@ import java.util.Set;
 import mil.nga.giat.geowave.accumulo.mapreduce.GeoWaveJobRunner;
 import mil.nga.giat.geowave.analytics.parameters.GlobalParameters;
 import mil.nga.giat.geowave.analytics.parameters.ParameterEnum;
+import mil.nga.giat.geowave.geotime.store.query.SpatialQuery;
 import mil.nga.giat.geowave.index.ByteArrayUtils;
 import mil.nga.giat.geowave.index.Persistable;
 import mil.nga.giat.geowave.index.PersistenceUtils;
 import mil.nga.giat.geowave.index.sfc.data.NumericRange;
 import mil.nga.giat.geowave.store.query.DistributableQuery;
-import mil.nga.giat.geowave.store.query.SpatialQuery;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Option;

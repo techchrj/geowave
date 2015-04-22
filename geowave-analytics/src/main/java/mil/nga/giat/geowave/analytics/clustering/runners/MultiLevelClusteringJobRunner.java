@@ -20,7 +20,7 @@ import mil.nga.giat.geowave.analytics.tools.mapreduce.MapReduceJobController;
 import mil.nga.giat.geowave.analytics.tools.mapreduce.MapReduceJobRunner;
 import mil.nga.giat.geowave.analytics.tools.mapreduce.SequenceFileInputFormatConfiguration;
 import mil.nga.giat.geowave.analytics.tools.mapreduce.SequenceFileOutputFormatConfiguration;
-import mil.nga.giat.geowave.store.index.IndexType;
+import mil.nga.giat.geowave.geotime.IndexType;
 
 import org.apache.commons.cli.Option;
 import org.apache.hadoop.conf.Configuration;

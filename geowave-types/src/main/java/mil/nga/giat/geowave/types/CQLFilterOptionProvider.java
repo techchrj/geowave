@@ -2,7 +2,7 @@ package mil.nga.giat.geowave.types;
 
 import mil.nga.giat.geowave.index.Persistable;
 import mil.nga.giat.geowave.index.StringUtils;
-import mil.nga.giat.geowave.ingest.IngestTypeOptionProvider;
+import mil.nga.giat.geowave.ingest.IngestFormatOptionProvider;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Options;
@@ -13,7 +13,7 @@ import org.opengis.filter.Filter;
 import org.opengis.filter.FilterVisitor;
 
 public class CQLFilterOptionProvider implements
-		IngestTypeOptionProvider,
+		IngestFormatOptionProvider,
 		Filter,
 		Persistable
 {

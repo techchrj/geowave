@@ -12,13 +12,13 @@ import mil.nga.giat.geowave.accumulo.AccumuloDataStore;
 import mil.nga.giat.geowave.accumulo.AccumuloOperations;
 import mil.nga.giat.geowave.ingest.AccumuloCommandLineOptions;
 import mil.nga.giat.geowave.ingest.GeoWaveData;
-import mil.nga.giat.geowave.ingest.IngestTypePluginProviderSpi;
+import mil.nga.giat.geowave.ingest.IngestFormatPluginProviderSpi;
 import mil.nga.giat.geowave.store.CloseableIterator;
 import mil.nga.giat.geowave.store.DataStore;
 import mil.nga.giat.geowave.store.IndexWriter;
 import mil.nga.giat.geowave.store.adapter.WritableDataAdapter;
-
 import mil.nga.giat.geowave.store.index.Index;
+
 import org.apache.accumulo.core.client.AccumuloException;
 import org.apache.accumulo.core.client.AccumuloSecurityException;
 import org.apache.commons.cli.CommandLine;
@@ -60,11 +60,11 @@ public class LocalFileIngestDriver extends
 	@Override
 	protected void runInternal(
 			final String[] args,
-			final List<IngestTypePluginProviderSpi<?, ?>> pluginProviders ) {
+			final List<IngestFormatPluginProviderSpi<?, ?>> pluginProviders ) {
 		// first collect the local file ingest plugins
 		final Map<String, LocalFileIngestPlugin<?>> localFileIngestPlugins = new HashMap<String, LocalFileIngestPlugin<?>>();
 		final List<WritableDataAdapter<?>> adapters = new ArrayList<WritableDataAdapter<?>>();
-		for (final IngestTypePluginProviderSpi<?, ?> pluginProvider : pluginProviders) {
+		for (final IngestFormatPluginProviderSpi<?, ?> pluginProvider : pluginProviders) {
 			LocalFileIngestPlugin<?> localFileIngestPlugin = null;
 			try {
 				localFileIngestPlugin = pluginProvider.getLocalFileIngestPlugin();
@@ -82,7 +82,7 @@ public class LocalFileIngestDriver extends
 			}
 			final boolean indexSupported = (accumulo.getIndex(localFileIngestPlugin.getSupportedIndices()) != null);
 			if (!indexSupported) {
-				LOGGER.warn("Local file ingest plugin for ingest type '" + pluginProvider.getIngestTypeName() + "' does not support dimensionality type '" + accumulo.getType().name() + "'");
+				LOGGER.warn("Local file ingest plugin for ingest type '" + pluginProvider.getIngestTypeName() + "' does not support dimensionality type '" + accumulo.getDimensionalityType() + "'");
 				continue;
 			}
 			localFileIngestPlugins.put(
@@ -130,14 +130,14 @@ public class LocalFileIngestDriver extends
 			final IngestRunData ingestRunData )
 			throws IOException {
 
-		Index supportedIndex = accumulo.getIndex(plugin.getSupportedIndices());
+		final Index supportedIndex = accumulo.getIndex(plugin.getSupportedIndices());
 		if (supportedIndex == null) {
 			LOGGER.error("Could not get index instance, getIndex() returned null;");
 			throw new IOException(
 					"Could not get index instance, getIndex() returned null");
 		}
 		final IndexWriter indexWriter = ingestRunData.getIndexWriter(supportedIndex);
-		Index idx = indexWriter.getIndex();
+		final Index idx = indexWriter.getIndex();
 		if (idx == null) {
 			LOGGER.error("Could not get index instance, getIndex() returned null;");
 			throw new IOException(

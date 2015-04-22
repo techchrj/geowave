@@ -44,7 +44,7 @@ public class ClearNamespaceDriver extends
 	@Override
 	protected void runInternal(
 			final String[] args,
-			final List<IngestTypePluginProviderSpi<?, ?>> pluginProviders ) {
+			final List<IngestFormatPluginProviderSpi<?, ?>> pluginProviders ) {
 		// just check if the flag to clear namespaces is set, and even if it is
 		// not, clear it, but only if a namespace is provided
 		if (!accumulo.isClearNamespace()) {

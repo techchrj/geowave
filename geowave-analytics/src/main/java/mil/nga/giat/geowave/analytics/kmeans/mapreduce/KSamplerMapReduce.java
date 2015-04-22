@@ -24,15 +24,14 @@ import mil.nga.giat.geowave.analytics.tools.AnalyticItemWrapperFactory;
 import mil.nga.giat.geowave.analytics.tools.ConfigurationWrapper;
 import mil.nga.giat.geowave.analytics.tools.SimpleFeatureItemWrapperFactory;
 import mil.nga.giat.geowave.analytics.tools.mapreduce.JobContextConfigurationWrapper;
+import mil.nga.giat.geowave.geotime.IndexType;
 import mil.nga.giat.geowave.index.ByteArrayId;
 import mil.nga.giat.geowave.index.StringUtils;
-import mil.nga.giat.geowave.store.index.IndexType;
 
 import org.apache.hadoop.io.ObjectWritable;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.Partitioner;
 import org.apache.hadoop.mapreduce.Reducer;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

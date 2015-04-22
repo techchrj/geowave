@@ -173,4 +173,10 @@ public class BasicDimensionDefinition implements
 				max);
 	}
 
+	@Override
+	public boolean isCompatibleDefinition(
+			NumericDimensionDefinition otherDimensionDefinition ) {
+		return equals(otherDimensionDefinition);
+	}
+
 }

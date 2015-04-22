@@ -1,7 +1,7 @@
 package mil.nga.giat.geowave.analytics.tools.model;
 
+import mil.nga.giat.geowave.geotime.IndexType;
 import mil.nga.giat.geowave.store.index.CommonIndexModel;
-import mil.nga.giat.geowave.store.index.IndexType;
 
 /**
  * 

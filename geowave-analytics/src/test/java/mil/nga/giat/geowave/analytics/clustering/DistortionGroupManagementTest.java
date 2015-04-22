@@ -13,9 +13,9 @@ import mil.nga.giat.geowave.accumulo.metadata.AccumuloIndexStore;
 import mil.nga.giat.geowave.analytics.tools.AnalyticFeature;
 import mil.nga.giat.geowave.analytics.tools.AnalyticItemWrapper;
 import mil.nga.giat.geowave.analytics.tools.SimpleFeatureItemWrapperFactory;
+import mil.nga.giat.geowave.geotime.IndexType;
 import mil.nga.giat.geowave.index.StringUtils;
 import mil.nga.giat.geowave.store.index.Index;
-import mil.nga.giat.geowave.store.index.IndexType;
 import mil.nga.giat.geowave.vector.adapter.FeatureDataAdapter;
 
 import org.apache.accumulo.core.client.AccumuloException;

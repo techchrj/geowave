@@ -46,7 +46,6 @@ public class SFCFactory
 	public static enum SFCType {
 		HILBERT,
 		ZORDER
-
 	}
 
 }

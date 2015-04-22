@@ -551,22 +551,15 @@
 		</plugins>
 	</build>
 	<modules>
-		<module>geowave-index</module>
-		<module>geowave-store</module>
-		<module>geowave-accumulo</module>
-		<module>geowave-vector</module>
-		<module>geowave-raster</module>
-		<module>geowave-ingest</module>
-		<module>geowave-types</module>
+		<module>core</module>
+		<module>extension</module>
 		<module>geowave-analytics</module>
 		<module>geowave-utils</module>
 		<module>geowave-client</module>
 		<module>geowave-services</module>
 		<module>geowave-deploy</module>
-		<module>geowave-benchmark</module>
 		<module>geowave-test</module>
 		<module>geowave-examples</module>
-		<module>geowave-cli</module>
 	</modules>
 	<repositories>
 		<repository>

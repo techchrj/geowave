@@ -4,11 +4,8 @@ import java.nio.ByteBuffer;
 
 import mil.nga.giat.geowave.index.ByteArrayId;
 import mil.nga.giat.geowave.index.Mergeable;
-import mil.nga.giat.geowave.index.dimension.TimeDefinition;
 import mil.nga.giat.geowave.index.sfc.data.NumericRange;
 import mil.nga.giat.geowave.store.DataStoreEntryInfo;
-import mil.nga.giat.geowave.store.query.BasicQuery.ConstraintData;
-import mil.nga.giat.geowave.store.query.BasicQuery.Constraints;
 
 abstract public class NumericRangeDataStatistics<T> extends
 		AbstractDataStatistics<T>
@@ -77,18 +74,6 @@ abstract public class NumericRangeDataStatistics<T> extends
 					max,
 					range.getMax());
 		}
-	}
-
-	public Constraints getConstraints() {
-		final Constraints constraints = new Constraints();
-		constraints.addConstraint(
-				TimeDefinition.class,
-				new ConstraintData(
-						new NumericRange(
-								min,
-								max),
-						true));
-		return constraints;
 	}
 
 	abstract protected NumericRange getRange(

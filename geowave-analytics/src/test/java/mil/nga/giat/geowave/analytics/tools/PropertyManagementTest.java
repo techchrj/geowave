@@ -18,8 +18,8 @@ import mil.nga.giat.geowave.analytics.parameters.ExtractParameters;
 import mil.nga.giat.geowave.analytics.parameters.GlobalParameters;
 import mil.nga.giat.geowave.analytics.parameters.InputParameters.Input;
 import mil.nga.giat.geowave.analytics.parameters.ParameterEnum;
+import mil.nga.giat.geowave.geotime.store.query.SpatialQuery;
 import mil.nga.giat.geowave.store.query.DistributableQuery;
-import mil.nga.giat.geowave.store.query.SpatialQuery;
 
 import org.apache.commons.cli.BasicParser;
 import org.apache.commons.cli.CommandLine;

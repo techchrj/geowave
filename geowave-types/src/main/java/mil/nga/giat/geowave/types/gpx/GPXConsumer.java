@@ -19,11 +19,11 @@ import javax.xml.stream.events.Attribute;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
+import mil.nga.giat.geowave.geotime.GeometryUtils;
 import mil.nga.giat.geowave.index.ByteArrayId;
 import mil.nga.giat.geowave.index.StringUtils;
 import mil.nga.giat.geowave.ingest.GeoWaveData;
 import mil.nga.giat.geowave.store.CloseableIterator;
-import mil.nga.giat.geowave.store.GeometryUtils;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;

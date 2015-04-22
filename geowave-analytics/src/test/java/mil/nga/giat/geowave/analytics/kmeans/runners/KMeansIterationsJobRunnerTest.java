@@ -29,9 +29,9 @@ import mil.nga.giat.geowave.analytics.tools.AnalyticFeature;
 import mil.nga.giat.geowave.analytics.tools.AnalyticItemWrapper;
 import mil.nga.giat.geowave.analytics.tools.PropertyManagement;
 import mil.nga.giat.geowave.analytics.tools.SimpleFeatureItemWrapperFactory;
+import mil.nga.giat.geowave.geotime.IndexType;
 import mil.nga.giat.geowave.index.ByteArrayId;
 import mil.nga.giat.geowave.index.StringUtils;
-import mil.nga.giat.geowave.store.index.IndexType;
 import mil.nga.giat.geowave.vector.adapter.FeatureDataAdapter;
 
 import org.apache.commons.cli.Option;

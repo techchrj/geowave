@@ -1,9 +1,9 @@
 package mil.nga.giat.geowave.examples.ingest;
 
 import com.vividsolutions.jts.geom.Coordinate;
-
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.Point;
+
 import mil.nga.giat.geowave.accumulo.AccumuloDataStore;
 import mil.nga.giat.geowave.accumulo.AccumuloOperations;
 import mil.nga.giat.geowave.accumulo.AccumuloOptions;
@@ -11,10 +11,11 @@ import mil.nga.giat.geowave.accumulo.BasicAccumuloOperations;
 import mil.nga.giat.geowave.accumulo.metadata.AccumuloAdapterStore;
 import mil.nga.giat.geowave.accumulo.metadata.AccumuloDataStatisticsStore;
 import mil.nga.giat.geowave.accumulo.metadata.AccumuloIndexStore;
+import mil.nga.giat.geowave.geotime.GeometryUtils;
 import mil.nga.giat.geowave.store.CloseableIterator;
 import mil.nga.giat.geowave.store.DataStore;
-import mil.nga.giat.geowave.store.GeometryUtils;
 import mil.nga.giat.geowave.store.query.BasicQuery;
+
 import org.apache.accumulo.core.client.AccumuloException;
 import org.apache.accumulo.core.client.AccumuloSecurityException;
 import org.apache.accumulo.core.client.Connector;

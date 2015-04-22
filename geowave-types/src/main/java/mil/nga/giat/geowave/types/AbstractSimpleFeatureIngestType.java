@@ -1,7 +1,7 @@
 package mil.nga.giat.geowave.types;
 
-import mil.nga.giat.geowave.ingest.IngestTypeOptionProvider;
-import mil.nga.giat.geowave.ingest.IngestTypePluginProviderSpi;
+import mil.nga.giat.geowave.ingest.IngestFormatOptionProvider;
+import mil.nga.giat.geowave.ingest.IngestFormatPluginProviderSpi;
 import mil.nga.giat.geowave.ingest.hdfs.StageToHdfsPlugin;
 import mil.nga.giat.geowave.ingest.hdfs.mapreduce.IngestFromHdfsPlugin;
 import mil.nga.giat.geowave.ingest.local.LocalFileIngestPlugin;
@@ -9,7 +9,7 @@ import mil.nga.giat.geowave.ingest.local.LocalFileIngestPlugin;
 import org.opengis.feature.simple.SimpleFeature;
 
 abstract public class AbstractSimpleFeatureIngestType<I> implements
-		IngestTypePluginProviderSpi<I, SimpleFeature>
+		IngestFormatPluginProviderSpi<I, SimpleFeature>
 {
 	protected final CQLFilterOptionProvider cqlFilterOptionProvider = new CQLFilterOptionProvider();
 	protected AbstractSimpleFeatureIngestPlugin<I> myInstance;
@@ -40,7 +40,7 @@ abstract public class AbstractSimpleFeatureIngestType<I> implements
 	}
 
 	@Override
-	public IngestTypeOptionProvider getIngestTypeOptionProvider() {
+	public IngestFormatOptionProvider getIngestTypeOptionProvider() {
 		return cqlFilterOptionProvider;
 	}
 

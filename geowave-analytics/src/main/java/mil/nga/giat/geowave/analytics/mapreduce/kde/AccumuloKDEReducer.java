@@ -4,9 +4,9 @@ import java.awt.image.WritableRaster;
 import java.io.IOException;
 
 import mil.nga.giat.geowave.accumulo.mapreduce.output.GeoWaveOutputKey;
+import mil.nga.giat.geowave.geotime.IndexType;
 import mil.nga.giat.geowave.index.ByteArrayId;
 import mil.nga.giat.geowave.raster.RasterUtils;
-import mil.nga.giat.geowave.store.index.IndexType;
 
 import org.apache.hadoop.io.DoubleWritable;
 import org.apache.hadoop.io.LongWritable;

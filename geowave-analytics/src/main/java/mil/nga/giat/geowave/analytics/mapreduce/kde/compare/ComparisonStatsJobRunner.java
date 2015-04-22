@@ -5,8 +5,8 @@ import java.io.IOException;
 import mil.nga.giat.geowave.accumulo.mapreduce.output.GeoWaveOutputFormat;
 import mil.nga.giat.geowave.accumulo.mapreduce.output.GeoWaveOutputKey;
 import mil.nga.giat.geowave.analytics.mapreduce.kde.KDEJobRunner;
+import mil.nga.giat.geowave.geotime.IndexType;
 import mil.nga.giat.geowave.raster.RasterUtils;
-import mil.nga.giat.geowave.store.index.IndexType;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;

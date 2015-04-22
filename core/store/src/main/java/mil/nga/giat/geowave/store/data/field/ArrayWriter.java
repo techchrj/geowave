@@ -1,29 +1,12 @@
 package mil.nga.giat.geowave.store.data.field;
 
 import java.nio.ByteBuffer;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 import mil.nga.giat.geowave.index.ByteArrayId;
-import mil.nga.giat.geowave.store.data.field.BasicWriter.CalendarWriter;
-import mil.nga.giat.geowave.store.data.field.BasicWriter.DateWriter;
-import mil.nga.giat.geowave.store.data.field.BasicWriter.DoubleWriter;
-import mil.nga.giat.geowave.store.data.field.BasicWriter.FloatWriter;
-import mil.nga.giat.geowave.store.data.field.BasicWriter.GeometryWriter;
-import mil.nga.giat.geowave.store.data.field.BasicWriter.IntWriter;
-import mil.nga.giat.geowave.store.data.field.BasicWriter.LongWriter;
-import mil.nga.giat.geowave.store.data.field.BasicWriter.ShortWriter;
-import mil.nga.giat.geowave.store.data.field.BasicWriter.StringWriter;
-import mil.nga.giat.geowave.store.dimension.GeometryWrapper;
-import mil.nga.giat.geowave.store.dimension.Time;
-
-import com.vividsolutions.jts.geom.Geometry;
 
 /**
- * This class contains all of the object array writer field types supported
- * 
+ * This class contains the basic object array writer field types
+ *
  */
 abstract public class ArrayWriter<RowType, FieldType> implements
 		FieldWriter<RowType, FieldType[]>
@@ -189,69 +172,6 @@ abstract public class ArrayWriter<RowType, FieldType> implements
 		}
 	}
 
-	public static class ShortArrayWriter extends
-			FixedSizeObjectArrayWriter<Object, Short>
-	{
-		public ShortArrayWriter() {
-			super(
-					new ShortWriter());
-		}
-	}
-
-	public static class FloatArrayWriter extends
-			FixedSizeObjectArrayWriter<Object, Float>
-	{
-		public FloatArrayWriter() {
-			super(
-					new FloatWriter());
-		}
-	}
-
-	public static class DoubleArrayWriter extends
-			FixedSizeObjectArrayWriter<Object, Double>
-	{
-		public DoubleArrayWriter() {
-			super(
-					new DoubleWriter());
-		}
-	}
-
-	public static class IntArrayWriter extends
-			FixedSizeObjectArrayWriter<Object, Integer>
-	{
-		public IntArrayWriter() {
-			super(
-					new IntWriter());
-		}
-	}
-
-	public static class LongArrayWriter extends
-			FixedSizeObjectArrayWriter<Object, Long>
-	{
-		public LongArrayWriter() {
-			super(
-					new LongWriter());
-		}
-	}
-
-	public static class DateArrayWriter extends
-			FixedSizeObjectArrayWriter<Object, Date>
-	{
-		public DateArrayWriter() {
-			super(
-					new DateWriter());
-		}
-	}
-
-	public static class CalendarArrayWriter extends
-			FixedSizeObjectArrayWriter<Object, Calendar>
-	{
-		public CalendarArrayWriter() {
-			super(
-					new CalendarWriter());
-		}
-	}
-
 	public static class VariableSizeObjectArrayWriter<RowType, FieldType> extends
 			ArrayWriter<RowType, FieldType>
 	{
@@ -273,24 +193,6 @@ abstract public class ArrayWriter<RowType, FieldType> implements
 		public byte[] writeField(
 				final FieldType[] fieldValue ) {
 			return super.writeVariableSizeField(fieldValue);
-		}
-	}
-
-	public static class StringArrayWriter extends
-			VariableSizeObjectArrayWriter<Object, String>
-	{
-		public StringArrayWriter() {
-			super(
-					new StringWriter());
-		}
-	}
-
-	public static class GeometryArrayWriter extends
-			VariableSizeObjectArrayWriter<Object, Geometry>
-	{
-		public GeometryArrayWriter() {
-			super(
-					new GeometryWriter());
 		}
 	}
 }

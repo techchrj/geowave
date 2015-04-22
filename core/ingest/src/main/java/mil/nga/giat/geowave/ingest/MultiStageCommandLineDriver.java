@@ -27,7 +27,7 @@ public class MultiStageCommandLineDriver extends
 	@Override
 	protected void runInternal(
 			final String[] args,
-			final List<IngestTypePluginProviderSpi<?, ?>> pluginProviders ) {
+			final List<IngestFormatPluginProviderSpi<?, ?>> pluginProviders ) {
 		for (final AbstractIngestCommandLineDriver stage : orderedStages) {
 			stage.runInternal(
 					args,

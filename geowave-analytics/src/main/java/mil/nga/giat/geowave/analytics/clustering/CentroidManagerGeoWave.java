@@ -26,13 +26,13 @@ import mil.nga.giat.geowave.analytics.tools.RunnerUtils;
 import mil.nga.giat.geowave.analytics.tools.SimpleFeatureItemWrapperFactory;
 import mil.nga.giat.geowave.analytics.tools.dbops.BasicAccumuloOperationsFactory;
 import mil.nga.giat.geowave.analytics.tools.dbops.DirectBasicAccumuloOperationsFactory;
+import mil.nga.giat.geowave.geotime.IndexType;
 import mil.nga.giat.geowave.index.ByteArrayId;
 import mil.nga.giat.geowave.index.StringUtils;
 import mil.nga.giat.geowave.store.CloseableIterator;
 import mil.nga.giat.geowave.store.adapter.DataAdapter;
 import mil.nga.giat.geowave.store.adapter.WritableDataAdapter;
 import mil.nga.giat.geowave.store.index.Index;
-import mil.nga.giat.geowave.store.index.IndexType;
 import mil.nga.giat.geowave.vector.adapter.FeatureDataAdapter;
 import mil.nga.giat.geowave.vector.query.AccumuloCqlConstraintsQuery;
 

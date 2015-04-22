@@ -3,80 +3,37 @@ package mil.nga.giat.geowave.store.data.field;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.TimeZone;
 
 import junit.framework.Assert;
-import mil.nga.giat.geowave.store.data.field.ArrayReader.CalendarArrayReader;
-import mil.nga.giat.geowave.store.data.field.ArrayReader.DateArrayReader;
-import mil.nga.giat.geowave.store.data.field.ArrayReader.DoubleArrayReader;
-import mil.nga.giat.geowave.store.data.field.ArrayReader.FloatArrayReader;
-import mil.nga.giat.geowave.store.data.field.ArrayReader.GeometryArrayReader;
-import mil.nga.giat.geowave.store.data.field.ArrayReader.IntArrayReader;
-import mil.nga.giat.geowave.store.data.field.ArrayReader.LongArrayReader;
-import mil.nga.giat.geowave.store.data.field.ArrayReader.ShortArrayReader;
-import mil.nga.giat.geowave.store.data.field.ArrayReader.StringArrayReader;
-import mil.nga.giat.geowave.store.data.field.ArrayWriter.CalendarArrayWriter;
-import mil.nga.giat.geowave.store.data.field.ArrayWriter.DateArrayWriter;
-import mil.nga.giat.geowave.store.data.field.ArrayWriter.DoubleArrayWriter;
-import mil.nga.giat.geowave.store.data.field.ArrayWriter.FloatArrayWriter;
-import mil.nga.giat.geowave.store.data.field.ArrayWriter.GeometryArrayWriter;
-import mil.nga.giat.geowave.store.data.field.ArrayWriter.IntArrayWriter;
-import mil.nga.giat.geowave.store.data.field.ArrayWriter.LongArrayWriter;
-import mil.nga.giat.geowave.store.data.field.ArrayWriter.ShortArrayWriter;
-import mil.nga.giat.geowave.store.data.field.ArrayWriter.StringArrayWriter;
-import mil.nga.giat.geowave.store.data.field.BasicReader.BigDecimalReader;
-import mil.nga.giat.geowave.store.data.field.BasicReader.BigIntegerReader;
-import mil.nga.giat.geowave.store.data.field.BasicReader.BooleanReader;
-import mil.nga.giat.geowave.store.data.field.BasicReader.ByteArrayReader;
-import mil.nga.giat.geowave.store.data.field.BasicReader.ByteReader;
-import mil.nga.giat.geowave.store.data.field.BasicReader.CalendarReader;
-import mil.nga.giat.geowave.store.data.field.BasicReader.DateReader;
-import mil.nga.giat.geowave.store.data.field.BasicReader.DoubleReader;
-import mil.nga.giat.geowave.store.data.field.BasicReader.FloatReader;
-import mil.nga.giat.geowave.store.data.field.BasicReader.GeometryReader;
-import mil.nga.giat.geowave.store.data.field.BasicReader.IntReader;
-import mil.nga.giat.geowave.store.data.field.BasicReader.LongReader;
-import mil.nga.giat.geowave.store.data.field.BasicReader.PrimitiveByteArrayReader;
-import mil.nga.giat.geowave.store.data.field.BasicReader.PrimitiveDoubleArrayReader;
-import mil.nga.giat.geowave.store.data.field.BasicReader.PrimitiveFloatArrayReader;
-import mil.nga.giat.geowave.store.data.field.BasicReader.PrimitiveIntArrayReader;
-import mil.nga.giat.geowave.store.data.field.BasicReader.PrimitiveLongArrayReader;
-import mil.nga.giat.geowave.store.data.field.BasicReader.PrimitiveShortArrayReader;
-import mil.nga.giat.geowave.store.data.field.BasicReader.ShortReader;
-import mil.nga.giat.geowave.store.data.field.BasicReader.StringReader;
-import mil.nga.giat.geowave.store.data.field.BasicWriter.BigDecimalWriter;
-import mil.nga.giat.geowave.store.data.field.BasicWriter.BigIntegerWriter;
-import mil.nga.giat.geowave.store.data.field.BasicWriter.BooleanWriter;
-import mil.nga.giat.geowave.store.data.field.BasicWriter.ByteArrayWriter;
-import mil.nga.giat.geowave.store.data.field.BasicWriter.ByteWriter;
-import mil.nga.giat.geowave.store.data.field.BasicWriter.CalendarWriter;
-import mil.nga.giat.geowave.store.data.field.BasicWriter.DateWriter;
-import mil.nga.giat.geowave.store.data.field.BasicWriter.DoubleWriter;
-import mil.nga.giat.geowave.store.data.field.BasicWriter.FloatWriter;
-import mil.nga.giat.geowave.store.data.field.BasicWriter.GeometryWriter;
-import mil.nga.giat.geowave.store.data.field.BasicWriter.IntWriter;
-import mil.nga.giat.geowave.store.data.field.BasicWriter.LongWriter;
-import mil.nga.giat.geowave.store.data.field.BasicWriter.PrimitiveByteArrayWriter;
-import mil.nga.giat.geowave.store.data.field.BasicWriter.PrimitiveDoubleArrayWriter;
-import mil.nga.giat.geowave.store.data.field.BasicWriter.PrimitiveFloatArrayWriter;
-import mil.nga.giat.geowave.store.data.field.BasicWriter.PrimitiveIntArrayWriter;
-import mil.nga.giat.geowave.store.data.field.BasicWriter.PrimitiveLongArrayWriter;
-import mil.nga.giat.geowave.store.data.field.BasicWriter.PrimitiveShortArrayWriter;
-import mil.nga.giat.geowave.store.data.field.BasicWriter.ShortWriter;
-import mil.nga.giat.geowave.store.data.field.BasicWriter.StringWriter;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import com.vividsolutions.jts.geom.Coordinate;
-import com.vividsolutions.jts.geom.Geometry;
-import com.vividsolutions.jts.geom.GeometryFactory;
-
 public class BasicReaderWriterTest
 {
+	private Boolean booleanExpected;
+	private Byte byteExpected;
+	private Short shortExpected;
+	private Short[] shortArrayExpected;
+	private short[] primShortArrayExpected;
+	private Float floatExpected;
+	private Float[] floatArrayExpected;
+	private float[] primFloatArrayExpected;
+	private Double doubleExpected;
+	private Double[] doubleArrayExpected;
+	private double[] primDoubleArrayExpected;
+	private BigDecimal bigDecimalExpected;
+	private Integer integerExpected;
+	private Integer[] intArrayExpected;
+	private int[] primIntArrayExpected;
+	private Long longExpected;
+	private Long[] longArrayExpected;
+	private long[] primLongArrayExpected;
+	private BigInteger bigIntegerExpected;
+	private String stringExpected;
+	private String[] stringArrayExpected;
+	private Byte[] byteArrayExpected;
+	private byte[] primByteArrayExpected;
 
 	public static void main(
 			final String[] args ) {
@@ -153,43 +110,6 @@ public class BasicReaderWriterTest
 			null,
 			String.class.getName()
 		};
-		geometryExpected = new GeometryFactory().createPoint(new Coordinate(
-				25,
-				32));
-		geometryArrayExpected = new Geometry[] {
-			new GeometryFactory().createPoint(new Coordinate(
-					25,
-					32)),
-			new GeometryFactory().createPoint(new Coordinate(
-					26,
-					33)),
-			new GeometryFactory().createPoint(new Coordinate(
-					27,
-					34)),
-			new GeometryFactory().createPoint(new Coordinate(
-					28,
-					35))
-		};
-		dateExpected = new Date();
-		dateArrayExpected = new Date[] {
-			new Date(),
-			null,
-			new Date(
-					0),
-			null
-		};
-		calendarExpected = new GregorianCalendar();
-		calendarExpected.setTimeZone(TimeZone.getTimeZone("GMT"));
-		final Calendar cal1 = new GregorianCalendar();
-		cal1.setTimeZone(TimeZone.getTimeZone("GMT"));
-		final Calendar cal2 = new GregorianCalendar();
-		cal2.setTimeZone(TimeZone.getTimeZone("GMT"));
-		calendarArrayExpected = new Calendar[] {
-			cal1,
-			null,
-			cal2,
-			null
-		};
 		byteArrayExpected = new Byte[] {
 			Byte.MIN_VALUE,
 			Byte.valueOf((byte) 55),
@@ -208,32 +128,48 @@ public class BasicReaderWriterTest
 		byte[] value;
 
 		// test Boolean reader/writer
-		value = new BooleanWriter().writeField(booleanExpected);
-		final Boolean booleanActual = new BooleanReader().readField(value);
+		value = FieldUtils.getDefaultWriterForClass(
+				Boolean.class).writeField(
+				booleanExpected);
+		final Boolean booleanActual = FieldUtils.getDefaultReaderForClass(
+				Boolean.class).readField(
+				value);
 		Assert.assertEquals(
 				"FAILED test of Boolean reader/writer",
 				booleanExpected.booleanValue(),
 				booleanActual.booleanValue());
 
 		// test Byte reader/writer
-		value = new ByteWriter().writeField(byteExpected);
-		final Byte byteActual = new ByteReader().readField(value);
+		value = FieldUtils.getDefaultWriterForClass(
+				Byte.class).writeField(
+				byteExpected);
+		final Byte byteActual = FieldUtils.getDefaultReaderForClass(
+				Byte.class).readField(
+				value);
 		Assert.assertEquals(
 				"FAILED test of Byte reader/writer",
 				byteExpected.byteValue(),
 				byteActual.byteValue());
 
 		// test Short reader/writer
-		value = new ShortWriter().writeField(shortExpected);
-		final Short shortActual = new ShortReader().readField(value);
+		value = FieldUtils.getDefaultWriterForClass(
+				Short.class).writeField(
+				shortExpected);
+		final Short shortActual = FieldUtils.getDefaultReaderForClass(
+				Short.class).readField(
+				value);
 		Assert.assertEquals(
 				"FAILED test of Short reader/writer",
 				shortExpected.shortValue(),
 				shortActual.shortValue());
 
 		// test Short Array reader/writer
-		value = new ShortArrayWriter().writeField(shortArrayExpected);
-		final Short[] shortArrayActual = new ShortArrayReader().readField(value);
+		value = FieldUtils.getDefaultWriterForClass(
+				Short[].class).writeField(
+				shortArrayExpected);
+		final Short[] shortArrayActual = FieldUtils.getDefaultReaderForClass(
+				Short[].class).readField(
+				value);
 		Assert.assertTrue(
 				"FAILED test of Short Array reader/writer",
 				Arrays.deepEquals(
@@ -241,8 +177,12 @@ public class BasicReaderWriterTest
 						shortArrayActual));
 
 		// test short Array reader/writer
-		value = new PrimitiveShortArrayWriter().writeField(primShortArrayExpected);
-		final short[] primShortArrayActual = new PrimitiveShortArrayReader().readField(value);
+		value = FieldUtils.getDefaultWriterForClass(
+				short[].class).writeField(
+				primShortArrayExpected);
+		final short[] primShortArrayActual = FieldUtils.getDefaultReaderForClass(
+				short[].class).readField(
+				value);
 		Assert.assertTrue(
 				"FAILED test of short Array reader/writer",
 				Arrays.equals(
@@ -250,16 +190,24 @@ public class BasicReaderWriterTest
 						primShortArrayActual));
 
 		// test Float reader/writer
-		value = new FloatWriter().writeField(floatExpected);
-		final Float floatActual = new FloatReader().readField(value);
+		value = FieldUtils.getDefaultWriterForClass(
+				Float.class).writeField(
+				floatExpected);
+		final Float floatActual = FieldUtils.getDefaultReaderForClass(
+				Float.class).readField(
+				value);
 		Assert.assertEquals(
 				"FAILED test of Float reader/writer",
 				floatExpected,
 				floatActual);
 
 		// test Float Array reader/writer
-		value = new FloatArrayWriter().writeField(floatArrayExpected);
-		final Float[] floatArrayActual = new FloatArrayReader().readField(value);
+		value = FieldUtils.getDefaultWriterForClass(
+				Float[].class).writeField(
+				floatArrayExpected);
+		final Float[] floatArrayActual = FieldUtils.getDefaultReaderForClass(
+				Float[].class).readField(
+				value);
 		Assert.assertTrue(
 				"FAILED test of Float Array reader/writer",
 				Arrays.deepEquals(
@@ -267,8 +215,12 @@ public class BasicReaderWriterTest
 						floatArrayActual));
 
 		// test float Array reader/writer
-		value = new PrimitiveFloatArrayWriter().writeField(primFloatArrayExpected);
-		final float[] primFloatArrayActual = new PrimitiveFloatArrayReader().readField(value);
+		value = FieldUtils.getDefaultWriterForClass(
+				float[].class).writeField(
+				primFloatArrayExpected);
+		final float[] primFloatArrayActual = FieldUtils.getDefaultReaderForClass(
+				float[].class).readField(
+				value);
 		Assert.assertTrue(
 				"FAILED test of float Array reader/writer",
 				Arrays.equals(
@@ -276,16 +228,24 @@ public class BasicReaderWriterTest
 						primFloatArrayActual));
 
 		// test Double reader/writer
-		value = new DoubleWriter().writeField(doubleExpected);
-		final Double doubleActual = new DoubleReader().readField(value);
+		value = FieldUtils.getDefaultWriterForClass(
+				Double.class).writeField(
+				doubleExpected);
+		final Double doubleActual = FieldUtils.getDefaultReaderForClass(
+				Double.class).readField(
+				value);
 		Assert.assertEquals(
 				"FAILED test of Double reader/writer",
 				doubleExpected,
 				doubleActual);
 
 		// test Double Array reader/writer
-		value = new DoubleArrayWriter().writeField(doubleArrayExpected);
-		final Double[] doubleArrayActual = new DoubleArrayReader().readField(value);
+		value = FieldUtils.getDefaultWriterForClass(
+				Double[].class).writeField(
+				doubleArrayExpected);
+		final Double[] doubleArrayActual = FieldUtils.getDefaultReaderForClass(
+				Double[].class).readField(
+				value);
 		Assert.assertTrue(
 				"FAILED test of Double Array reader/writer",
 				Arrays.deepEquals(
@@ -293,8 +253,12 @@ public class BasicReaderWriterTest
 						doubleArrayActual));
 
 		// test double Array reader/writer
-		value = new PrimitiveDoubleArrayWriter().writeField(primDoubleArrayExpected);
-		final double[] primDoubleArrayActual = new PrimitiveDoubleArrayReader().readField(value);
+		value = FieldUtils.getDefaultWriterForClass(
+				double[].class).writeField(
+				primDoubleArrayExpected);
+		final double[] primDoubleArrayActual = FieldUtils.getDefaultReaderForClass(
+				double[].class).readField(
+				value);
 		Assert.assertTrue(
 				"FAILED test of double Array reader/writer",
 				Arrays.equals(
@@ -302,24 +266,36 @@ public class BasicReaderWriterTest
 						primDoubleArrayActual));
 
 		// test BigDecimal reader/writer
-		value = new BigDecimalWriter().writeField(bigDecimalExpected);
-		final BigDecimal bigDecimalActual = new BigDecimalReader().readField(value);
+		value = FieldUtils.getDefaultWriterForClass(
+				BigDecimal.class).writeField(
+				bigDecimalExpected);
+		final BigDecimal bigDecimalActual = FieldUtils.getDefaultReaderForClass(
+				BigDecimal.class).readField(
+				value);
 		Assert.assertEquals(
 				"FAILED test of BigDecimal reader/writer",
 				bigDecimalExpected,
 				bigDecimalActual);
 
 		// test Integer reader/writer
-		value = new IntWriter().writeField(integerExpected);
-		final Integer integerActual = new IntReader().readField(value);
+		value = FieldUtils.getDefaultWriterForClass(
+				Integer.class).writeField(
+				integerExpected);
+		final Integer integerActual = FieldUtils.getDefaultReaderForClass(
+				Integer.class).readField(
+				value);
 		Assert.assertEquals(
 				"FAILED test of Integer reader/writer",
 				integerExpected,
 				integerActual);
 
 		// test Integer Array reader/writer
-		value = new IntArrayWriter().writeField(intArrayExpected);
-		final Integer[] intArrayActual = new IntArrayReader().readField(value);
+		value = FieldUtils.getDefaultWriterForClass(
+				Integer[].class).writeField(
+				intArrayExpected);
+		final Integer[] intArrayActual = FieldUtils.getDefaultReaderForClass(
+				Integer[].class).readField(
+				value);
 		Assert.assertTrue(
 				"FAILED test of Integer Array reader/writer",
 				Arrays.deepEquals(
@@ -327,8 +303,12 @@ public class BasicReaderWriterTest
 						intArrayActual));
 
 		// test int Array reader/writer
-		value = new PrimitiveIntArrayWriter().writeField(primIntArrayExpected);
-		final int[] primIntArrayActual = new PrimitiveIntArrayReader().readField(value);
+		value = FieldUtils.getDefaultWriterForClass(
+				int[].class).writeField(
+				primIntArrayExpected);
+		final int[] primIntArrayActual = FieldUtils.getDefaultReaderForClass(
+				int[].class).readField(
+				value);
 		Assert.assertTrue(
 				"FAILED test of int Array reader/writer",
 				Arrays.equals(
@@ -336,16 +316,24 @@ public class BasicReaderWriterTest
 						primIntArrayActual));
 
 		// test Long reader/writer
-		value = new LongWriter().writeField(longExpected);
-		final Long longActual = new LongReader().readField(value);
+		value = FieldUtils.getDefaultWriterForClass(
+				Long.class).writeField(
+				longExpected);
+		final Long longActual = FieldUtils.getDefaultReaderForClass(
+				Long.class).readField(
+				value);
 		Assert.assertEquals(
 				"FAILED test of Long reader/writer",
 				longExpected,
 				longActual);
 
 		// test Long Array reader/writer
-		value = new LongArrayWriter().writeField(longArrayExpected);
-		final Long[] longArrayActual = new LongArrayReader().readField(value);
+		value = FieldUtils.getDefaultWriterForClass(
+				Long[].class).writeField(
+				longArrayExpected);
+		final Long[] longArrayActual = FieldUtils.getDefaultReaderForClass(
+				Long[].class).readField(
+				value);
 		Assert.assertTrue(
 				"FAILED test of Long Array reader/writer",
 				Arrays.deepEquals(
@@ -353,8 +341,12 @@ public class BasicReaderWriterTest
 						longArrayActual));
 
 		// test long Array reader/writer
-		value = new PrimitiveLongArrayWriter().writeField(primLongArrayExpected);
-		final long[] primLongArrayActual = new PrimitiveLongArrayReader().readField(value);
+		value = FieldUtils.getDefaultWriterForClass(
+				long[].class).writeField(
+				primLongArrayExpected);
+		final long[] primLongArrayActual = FieldUtils.getDefaultReaderForClass(
+				long[].class).readField(
+				value);
 		Assert.assertTrue(
 				"FAILED test of long Array reader/writer",
 				Arrays.equals(
@@ -362,85 +354,49 @@ public class BasicReaderWriterTest
 						primLongArrayActual));
 
 		// test BigInteger reader/writer
-		value = new BigIntegerWriter().writeField(bigIntegerExpected);
-		final BigInteger bigIntegerActual = new BigIntegerReader().readField(value);
+		value = FieldUtils.getDefaultWriterForClass(
+				BigInteger.class).writeField(
+				bigIntegerExpected);
+		final BigInteger bigIntegerActual = FieldUtils.getDefaultReaderForClass(
+				BigInteger.class).readField(
+				value);
 		Assert.assertEquals(
 				"FAILED test of BigInteger reader/writer",
 				bigIntegerExpected,
 				bigIntegerActual);
 
 		// test String reader/writer
-		value = new StringWriter().writeField(stringExpected);
-		final String stringActual = new StringReader().readField(value);
+		value = FieldUtils.getDefaultWriterForClass(
+				String.class).writeField(
+				stringExpected);
+		final String stringActual = FieldUtils.getDefaultReaderForClass(
+				String.class).readField(
+				value);
 		Assert.assertEquals(
 				"FAILED test of String reader/writer",
 				stringExpected,
 				stringActual);
 
 		// test String Array reader/writer
-		value = new StringArrayWriter().writeField(stringArrayExpected);
-		final String[] stringArrayActual = new StringArrayReader().readField(value);
+		value = FieldUtils.getDefaultWriterForClass(
+				String[].class).writeField(
+				stringArrayExpected);
+		final String[] stringArrayActual = FieldUtils.getDefaultReaderForClass(
+				String[].class).readField(
+				value);
 		Assert.assertTrue(
 				"FAILED test of String Array reader/writer",
 				Arrays.deepEquals(
 						stringArrayExpected,
 						stringArrayActual));
 
-		// test Geometry reader/writer
-		value = new GeometryWriter().writeField(geometryExpected);
-		final Geometry geometryActual = new GeometryReader().readField(value);
-		// TODO develop the "equals" test for Geometry
-		Assert.assertEquals(
-				"FAILED test of Geometry reader/writer",
-				geometryExpected,
-				geometryActual);
-
-		// test Geometry Array reader/writer
-		value = new GeometryArrayWriter().writeField(geometryArrayExpected);
-		final Geometry[] geometryArrayActual = new GeometryArrayReader().readField(value);
-		Assert.assertTrue(
-				"FAILED test of String Array reader/writer",
-				Arrays.deepEquals(
-						geometryArrayExpected,
-						geometryArrayActual));
-
-		// test Date reader/writer
-		value = new DateWriter().writeField(dateExpected);
-		final Date dateActual = new DateReader().readField(value);
-		Assert.assertEquals(
-				"FAILED test of Date reader/writer",
-				dateExpected,
-				dateActual);
-
-		// test Date Array reader/writer
-		value = new DateArrayWriter().writeField(dateArrayExpected);
-		final Date[] dateArrayActual = new DateArrayReader().readField(value);
-		Assert.assertTrue(
-				"FAILED test of Date Array reader/writer",
-				Arrays.deepEquals(
-						dateArrayExpected,
-						dateArrayActual));
-
-		// test Calendar reader/writer
-		value = new CalendarWriter().writeField(calendarExpected);
-		final Calendar calendarActual = new CalendarReader().readField(value);
-		Assert.assertEquals(
-				"FAILED test of Calendar reader/writer",
-				calendarExpected,
-				calendarActual);
-
-		// test Calendar Array reader/writer
-		value = new CalendarArrayWriter().writeField(calendarArrayExpected);
-		final Calendar[] calendarArrayActual = new CalendarArrayReader().readField(value);
-		Assert.assertTrue(
-				"FAILED test of Calendar Array reader/writer",
-				Arrays.deepEquals(
-						calendarArrayExpected,
-						calendarArrayActual));
-
 		// test Byte [] reader/writer
-		value = new ByteArrayWriter().writeField(byteArrayExpected);
-		final Byte[] byteArrayActual = new ByteArrayReader().readField(value);
+		value = FieldUtils.getDefaultWriterForClass(
+				Byte[].class).writeField(
+				byteArrayExpected);
+		final Byte[] byteArrayActual = FieldUtils.getDefaultReaderForClass(
+				Byte[].class).readField(
+				value);
 		Assert.assertTrue(
 				"FAILED test of Byte [] reader/writer",
 				Arrays.deepEquals(
@@ -448,8 +404,12 @@ public class BasicReaderWriterTest
 						byteArrayActual));
 
 		// test byte [] reader/writer
-		value = new PrimitiveByteArrayWriter().writeField(primByteArrayExpected);
-		final byte[] primByteArrayActual = new PrimitiveByteArrayReader().readField(value);
+		value = FieldUtils.getDefaultWriterForClass(
+				byte[].class).writeField(
+				primByteArrayExpected);
+		final byte[] primByteArrayActual = FieldUtils.getDefaultReaderForClass(
+				byte[].class).readField(
+				value);
 		Assert.assertTrue(
 				"FAILED test of byte [] reader/writer",
 				Arrays.equals(
@@ -457,33 +417,4 @@ public class BasicReaderWriterTest
 						primByteArrayActual));
 	}
 
-	private Boolean booleanExpected;
-	private Byte byteExpected;
-	private Short shortExpected;
-	private Short[] shortArrayExpected;
-	private short[] primShortArrayExpected;
-	private Float floatExpected;
-	private Float[] floatArrayExpected;
-	private float[] primFloatArrayExpected;
-	private Double doubleExpected;
-	private Double[] doubleArrayExpected;
-	private double[] primDoubleArrayExpected;
-	private BigDecimal bigDecimalExpected;
-	private Integer integerExpected;
-	private Integer[] intArrayExpected;
-	private int[] primIntArrayExpected;
-	private Long longExpected;
-	private Long[] longArrayExpected;
-	private long[] primLongArrayExpected;
-	private BigInteger bigIntegerExpected;
-	private String stringExpected;
-	private String[] stringArrayExpected;
-	private Geometry geometryExpected;
-	private Geometry[] geometryArrayExpected;
-	private Date dateExpected;
-	private Date[] dateArrayExpected;
-	private Calendar calendarExpected;
-	private Calendar[] calendarArrayExpected;
-	private Byte[] byteArrayExpected;
-	private byte[] primByteArrayExpected;
 }

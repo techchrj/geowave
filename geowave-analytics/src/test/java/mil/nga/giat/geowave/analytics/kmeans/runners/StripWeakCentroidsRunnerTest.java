@@ -18,9 +18,9 @@ import mil.nga.giat.geowave.analytics.kmeans.mapreduce.runners.StripWeakCentroid
 import mil.nga.giat.geowave.analytics.kmeans.mapreduce.runners.StripWeakCentroidsRunner.TailStableChangeBreakStrategy;
 import mil.nga.giat.geowave.analytics.tools.AnalyticItemWrapper;
 import mil.nga.giat.geowave.analytics.tools.PropertyManagement;
+import mil.nga.giat.geowave.geotime.IndexType;
 import mil.nga.giat.geowave.index.ByteArrayId;
 import mil.nga.giat.geowave.index.StringUtils;
-import mil.nga.giat.geowave.store.index.IndexType;
 
 import org.apache.hadoop.conf.Configuration;
 import org.junit.Assert;

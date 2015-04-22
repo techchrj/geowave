@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.util.Date;
 
 import mil.nga.giat.geowave.accumulo.BasicAccumuloOperations;
+import mil.nga.giat.geowave.geotime.GeometryUtils;
 import mil.nga.giat.geowave.store.DataStore;
-import mil.nga.giat.geowave.store.GeometryUtils;
 import mil.nga.giat.geowave.store.IndexWriter;
 import mil.nga.giat.geowave.store.index.Index;
 import mil.nga.giat.geowave.vector.adapter.FeatureDataAdapter;

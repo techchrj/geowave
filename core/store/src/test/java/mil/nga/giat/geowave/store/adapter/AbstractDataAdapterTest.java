@@ -12,11 +12,8 @@ import mil.nga.giat.geowave.index.sfc.data.NumericData;
 import mil.nga.giat.geowave.index.sfc.data.NumericRange;
 import mil.nga.giat.geowave.store.adapter.NativeFieldHandler.RowBuilder;
 import mil.nga.giat.geowave.store.data.PersistentValue;
-import mil.nga.giat.geowave.store.data.field.BasicReader.IntReader;
-import mil.nga.giat.geowave.store.data.field.BasicReader.StringReader;
-import mil.nga.giat.geowave.store.data.field.BasicWriter.IntWriter;
-import mil.nga.giat.geowave.store.data.field.BasicWriter.StringWriter;
 import mil.nga.giat.geowave.store.data.field.FieldReader;
+import mil.nga.giat.geowave.store.data.field.FieldUtils;
 import mil.nga.giat.geowave.store.data.field.FieldWriter;
 import mil.nga.giat.geowave.store.dimension.DimensionField;
 import mil.nga.giat.geowave.store.index.CommonIndexModel;
@@ -78,9 +75,9 @@ public class AbstractDataAdapterTest
 		}
 
 		/**
-		 * 
+		 *
 		 * Return the adapter ID
-		 * 
+		 *
 		 * @return a unique identifier for this adapter
 		 */
 		@Override
@@ -104,10 +101,10 @@ public class AbstractDataAdapterTest
 		public FieldReader getReader(
 				final ByteArrayId fieldId ) {
 			if (fieldId.equals(INTEGER)) {
-				return new IntReader();
+				return FieldUtils.getDefaultReaderForClass(Integer.class);
 			}
 			else if (fieldId.equals(ID)) {
-				return new StringReader();
+				return FieldUtils.getDefaultReaderForClass(String.class);
 			}
 			return null;
 		}
@@ -120,10 +117,10 @@ public class AbstractDataAdapterTest
 		public FieldWriter getWriter(
 				final ByteArrayId fieldId ) {
 			if (fieldId.equals(INTEGER)) {
-				return new IntWriter();
+				return FieldUtils.getDefaultWriterForClass(Integer.class);
 			}
 			else if (fieldId.equals(ID)) {
-				return new StringWriter();
+				return FieldUtils.getDefaultWriterForClass(String.class);
 			}
 			return null;
 		}
@@ -185,8 +182,8 @@ public class AbstractDataAdapterTest
 
 		@Override
 		public boolean overlaps(
-				DimensionField[] dimensions,
-				NumericData[] rangeData ) {
+				final DimensionField[] dimensions,
+				final NumericData[] rangeData ) {
 			return true;
 		}
 
@@ -442,9 +439,16 @@ public class AbstractDataAdapterTest
 			return null;
 		}
 
+		@Override
 		public NumericData getFullRange() {
 			// TODO Auto-generated method stub
 			return null;
+		}
+
+		@Override
+		public boolean isCompatibleDefinition(
+				NumericDimensionDefinition otherDimensionDefinition ) {
+			return false;
 		}
 
 	}

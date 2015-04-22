@@ -4,7 +4,6 @@ import java.nio.ByteBuffer;
 
 import mil.nga.giat.geowave.index.ByteArrayId;
 import mil.nga.giat.geowave.index.NumericIndexStrategy;
-import mil.nga.giat.geowave.index.NumericIndexStrategyFactory.DataType;
 import mil.nga.giat.geowave.index.Persistable;
 import mil.nga.giat.geowave.index.PersistenceUtils;
 import mil.nga.giat.geowave.index.StringUtils;
@@ -18,30 +17,14 @@ public class Index implements
 {
 	protected NumericIndexStrategy indexStrategy;
 	protected CommonIndexModel indexModel;
-	protected DimensionalityType dimensionalityType;
-	protected DataType dataType;
 
 	protected Index() {}
-
+	
 	public Index(
 			final NumericIndexStrategy indexStrategy,
-			final CommonIndexModel indexModel ) {
-		this(
-				indexStrategy,
-				indexModel,
-				DimensionalityType.OTHER,
-				DataType.OTHER);
-	}
-
-	public Index(
-			final NumericIndexStrategy indexStrategy,
-			final CommonIndexModel indexModel,
-			final DimensionalityType dimensionalityType,
-			final DataType dataType ) {
+			final CommonIndexModel indexModel) {
 		this.indexStrategy = indexStrategy;
 		this.indexModel = indexModel;
-		this.dimensionalityType = dimensionalityType;
-		this.dataType = dataType;
 	}
 
 	public NumericIndexStrategy getIndexStrategy() {
@@ -50,14 +33,6 @@ public class Index implements
 
 	public CommonIndexModel getIndexModel() {
 		return indexModel;
-	}
-
-	public DimensionalityType getDimensionalityType() {
-		return dimensionalityType;
-	}
-
-	public DataType getDataType() {
-		return dataType;
 	}
 
 	public ByteArrayId getId() {
@@ -91,12 +66,10 @@ public class Index implements
 	public byte[] toBinary() {
 		final byte[] indexStrategyBinary = PersistenceUtils.toBinary(indexStrategy);
 		final byte[] indexModelBinary = PersistenceUtils.toBinary(indexModel);
-		final ByteBuffer buf = ByteBuffer.allocate(indexStrategyBinary.length + indexModelBinary.length + 6);
+		final ByteBuffer buf = ByteBuffer.allocate(indexStrategyBinary.length + indexModelBinary.length + 4);
 		buf.putInt(indexStrategyBinary.length);
 		buf.put(indexStrategyBinary);
 		buf.put(indexModelBinary);
-		buf.put((byte) dataType.ordinal());
-		buf.put((byte) dimensionalityType.ordinal());
 		return buf.array();
 	}
 
@@ -111,12 +84,11 @@ public class Index implements
 		indexStrategy = PersistenceUtils.fromBinary(
 				indexStrategyBinary,
 				NumericIndexStrategy.class);
-		final byte[] indexModelBinary = new byte[bytes.length - indexStrategyLength - 6];
+
+		final byte[] indexModelBinary = new byte[bytes.length - indexStrategyLength - 4];
 		buf.get(indexModelBinary);
 		indexModel = PersistenceUtils.fromBinary(
 				indexModelBinary,
 				CommonIndexModel.class);
-		dataType = DataType.values()[buf.get()];
-		dimensionalityType = DimensionalityType.values()[buf.get()];
 	}
 }

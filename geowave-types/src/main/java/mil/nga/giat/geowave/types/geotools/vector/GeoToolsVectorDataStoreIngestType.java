@@ -1,7 +1,7 @@
 package mil.nga.giat.geowave.types.geotools.vector;
 
-import mil.nga.giat.geowave.ingest.IngestTypeOptionProvider;
-import mil.nga.giat.geowave.ingest.IngestTypePluginProviderSpi;
+import mil.nga.giat.geowave.ingest.IngestFormatOptionProvider;
+import mil.nga.giat.geowave.ingest.IngestFormatPluginProviderSpi;
 import mil.nga.giat.geowave.ingest.hdfs.StageToHdfsPlugin;
 import mil.nga.giat.geowave.ingest.hdfs.mapreduce.IngestFromHdfsPlugin;
 import mil.nga.giat.geowave.ingest.local.LocalFileIngestPlugin;
@@ -15,7 +15,7 @@ import org.opengis.feature.simple.SimpleFeature;
  * system into GeoWave.
  */
 public class GeoToolsVectorDataStoreIngestType implements
-		IngestTypePluginProviderSpi<Object, SimpleFeature>
+		IngestFormatPluginProviderSpi<Object, SimpleFeature>
 {
 	protected final CQLFilterOptionProvider cqlFilterOptionProvider = new CQLFilterOptionProvider();
 
@@ -50,7 +50,7 @@ public class GeoToolsVectorDataStoreIngestType implements
 	}
 
 	@Override
-	public IngestTypeOptionProvider getIngestTypeOptionProvider() {
+	public IngestFormatOptionProvider getIngestTypeOptionProvider() {
 		return cqlFilterOptionProvider;
 	}
 

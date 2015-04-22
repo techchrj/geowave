@@ -5,15 +5,16 @@ import java.util.Date;
 import java.util.List;
 
 import com.vividsolutions.jts.geom.Point;
+
 import mil.nga.giat.geowave.accumulo.AccumuloDataStore;
 import mil.nga.giat.geowave.accumulo.BasicAccumuloOperations;
 import mil.nga.giat.geowave.accumulo.metadata.AccumuloAdapterStore;
 import mil.nga.giat.geowave.accumulo.metadata.AccumuloDataStatisticsStore;
 import mil.nga.giat.geowave.accumulo.metadata.AccumuloIndexStore;
+import mil.nga.giat.geowave.geotime.GeometryUtils;
+import mil.nga.giat.geowave.geotime.IndexType;
 import mil.nga.giat.geowave.store.DataStore;
-import mil.nga.giat.geowave.store.GeometryUtils;
 import mil.nga.giat.geowave.store.index.Index;
-import mil.nga.giat.geowave.store.index.IndexType;
 import mil.nga.giat.geowave.vector.adapter.FeatureDataAdapter;
 
 import org.apache.accumulo.core.client.AccumuloException;

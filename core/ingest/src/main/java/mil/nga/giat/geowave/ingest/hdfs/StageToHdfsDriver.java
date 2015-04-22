@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import mil.nga.giat.geowave.ingest.IngestTypePluginProviderSpi;
+import mil.nga.giat.geowave.ingest.IngestFormatPluginProviderSpi;
 import mil.nga.giat.geowave.ingest.local.AbstractLocalFileDriver;
 
 import org.apache.avro.file.DataFileWriter;
@@ -76,11 +76,11 @@ public class StageToHdfsDriver extends
 	@Override
 	protected void runInternal(
 			final String[] args,
-			final List<IngestTypePluginProviderSpi<?, ?>> pluginProviders ) {
+			final List<IngestFormatPluginProviderSpi<?, ?>> pluginProviders ) {
 
 		// first collect the stage to hdfs plugins
 		final Map<String, StageToHdfsPlugin<?>> stageToHdfsPlugins = new HashMap<String, StageToHdfsPlugin<?>>();
-		for (final IngestTypePluginProviderSpi<?, ?> pluginProvider : pluginProviders) {
+		for (final IngestFormatPluginProviderSpi<?, ?> pluginProvider : pluginProviders) {
 			StageToHdfsPlugin<?> stageToHdfsPlugin = null;
 			try {
 				stageToHdfsPlugin = pluginProvider.getStageToHdfsPlugin();

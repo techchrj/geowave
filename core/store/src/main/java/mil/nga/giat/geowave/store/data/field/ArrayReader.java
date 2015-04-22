@@ -3,26 +3,13 @@ package mil.nga.giat.geowave.store.data.field;
 import java.lang.reflect.Array;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import mil.nga.giat.geowave.store.data.field.ArrayWriter.Encoding;
-import mil.nga.giat.geowave.store.data.field.BasicReader.CalendarReader;
-import mil.nga.giat.geowave.store.data.field.BasicReader.DateReader;
-import mil.nga.giat.geowave.store.data.field.BasicReader.DoubleReader;
-import mil.nga.giat.geowave.store.data.field.BasicReader.FloatReader;
-import mil.nga.giat.geowave.store.data.field.BasicReader.GeometryReader;
-import mil.nga.giat.geowave.store.data.field.BasicReader.IntReader;
-import mil.nga.giat.geowave.store.data.field.BasicReader.LongReader;
-import mil.nga.giat.geowave.store.data.field.BasicReader.ShortReader;
-import mil.nga.giat.geowave.store.data.field.BasicReader.StringReader;
 import mil.nga.giat.geowave.store.filter.GenericTypeResolver;
 
-import com.vividsolutions.jts.geom.Geometry;
-
 /**
- * This class contains all of the object array reader field types supported
+ * This class contains the basic array reader field types
  *
  */
 public class ArrayReader<FieldType> implements
@@ -157,69 +144,6 @@ public class ArrayReader<FieldType> implements
 		}
 	}
 
-	public static class ShortArrayReader extends
-			FixedSizeObjectArrayReader<Short>
-	{
-		public ShortArrayReader() {
-			super(
-					new ShortReader());
-		}
-	}
-
-	public static class FloatArrayReader extends
-			FixedSizeObjectArrayReader<Float>
-	{
-		public FloatArrayReader() {
-			super(
-					new FloatReader());
-		}
-	}
-
-	public static class DoubleArrayReader extends
-			FixedSizeObjectArrayReader<Double>
-	{
-		public DoubleArrayReader() {
-			super(
-					new DoubleReader());
-		}
-	}
-
-	public static class IntArrayReader extends
-			FixedSizeObjectArrayReader<Integer>
-	{
-		public IntArrayReader() {
-			super(
-					new IntReader());
-		}
-	}
-
-	public static class LongArrayReader extends
-			FixedSizeObjectArrayReader<Long>
-	{
-		public LongArrayReader() {
-			super(
-					new LongReader());
-		}
-	}
-
-	public static class DateArrayReader extends
-			FixedSizeObjectArrayReader<Date>
-	{
-		public DateArrayReader() {
-			super(
-					new DateReader());
-		}
-	}
-
-	public static class CalendarArrayReader extends
-			FixedSizeObjectArrayReader<Calendar>
-	{
-		public CalendarArrayReader() {
-			super(
-					new CalendarReader());
-		}
-	}
-
 	public static class VariableSizeObjectArrayReader<FieldType> extends
 			ArrayReader<FieldType>
 	{
@@ -233,24 +157,6 @@ public class ArrayReader<FieldType> implements
 		public FieldType[] readField(
 				final byte[] fieldData ) {
 			return readVariableSizeField(fieldData);
-		}
-	}
-
-	public static class StringArrayReader extends
-			VariableSizeObjectArrayReader<String>
-	{
-		public StringArrayReader() {
-			super(
-					new StringReader());
-		}
-	}
-
-	public static class GeometryArrayReader extends
-			VariableSizeObjectArrayReader<Geometry>
-	{
-		public GeometryArrayReader() {
-			super(
-					new GeometryReader());
 		}
 	}
 }

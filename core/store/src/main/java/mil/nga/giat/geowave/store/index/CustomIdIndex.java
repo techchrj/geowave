@@ -4,7 +4,6 @@ import java.nio.ByteBuffer;
 
 import mil.nga.giat.geowave.index.ByteArrayId;
 import mil.nga.giat.geowave.index.NumericIndexStrategy;
-import mil.nga.giat.geowave.index.NumericIndexStrategyFactory.DataType;
 
 public class CustomIdIndex extends
 		Index
@@ -18,14 +17,10 @@ public class CustomIdIndex extends
 	public CustomIdIndex(
 			final NumericIndexStrategy indexStrategy,
 			final CommonIndexModel indexModel,
-			final DimensionalityType dimensionalityType,
-			final DataType dataType,
 			final ByteArrayId id ) {
 		super(
 				indexStrategy,
-				indexModel,
-				dimensionalityType,
-				dataType);
+				indexModel);
 		this.id = id;
 	}
 
@@ -62,7 +57,7 @@ public class CustomIdIndex extends
 
 	@Override
 	public boolean equals(
-			Object obj ) {
+			final Object obj ) {
 		if (!(obj instanceof CustomIdIndex)) {
 			return false;
 		}

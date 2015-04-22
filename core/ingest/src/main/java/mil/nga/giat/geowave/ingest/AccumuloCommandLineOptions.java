@@ -1,8 +1,12 @@
 package mil.nga.giat.geowave.ingest;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.ServiceLoader;
+
 import mil.nga.giat.geowave.accumulo.AccumuloOperations;
 import mil.nga.giat.geowave.accumulo.BasicAccumuloOperations;
-import mil.nga.giat.geowave.store.index.DimensionalityType;
 import mil.nga.giat.geowave.store.index.Index;
 
 import org.apache.accumulo.core.client.AccumuloException;
@@ -12,18 +16,21 @@ import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This class encapsulates all of the options and parsed values specific to
  * setting up GeoWave to appropriately connect to Accumulo. This class also can
  * perform the function of clearing data for a namespace if that option is
  * activated.
- * 
+ *
  */
 public class AccumuloCommandLineOptions
 {
-	private final static Logger LOGGER = Logger.getLogger(AccumuloCommandLineOptions.class);
+	private final static Logger LOGGER = LoggerFactory.getLogger(AccumuloCommandLineOptions.class);
+	private static Map<String, IndexCompatibilityVisitor> registeredDimensionalityTypes = null;
+	private static String defaultDimensionalityType;
 	private final String zookeepers;
 	private final String instanceId;
 	private final String user;
@@ -31,7 +38,7 @@ public class AccumuloCommandLineOptions
 	private final String namespace;
 	private final String visibility;
 	private final boolean clearNamespace;
-	private final DimensionalityType type;
+	private final String dimensionalityType;
 	private AccumuloOperations operations;
 
 	public AccumuloCommandLineOptions(
@@ -42,7 +49,7 @@ public class AccumuloCommandLineOptions
 			final String namespace,
 			final String visibility,
 			final boolean clearNamespace,
-			final DimensionalityType type )
+			final String dimensionalityType )
 			throws AccumuloException,
 			AccumuloSecurityException {
 		this.zookeepers = zookeepers;
@@ -52,7 +59,7 @@ public class AccumuloCommandLineOptions
 		this.namespace = namespace;
 		this.visibility = visibility;
 		this.clearNamespace = clearNamespace;
-		this.type = type;
+		this.dimensionalityType = dimensionalityType;
 
 		if (clearNamespace) {
 			clearNamespace();
@@ -102,8 +109,8 @@ public class AccumuloCommandLineOptions
 		return visibility;
 	}
 
-	public DimensionalityType getType() {
-		return type;
+	public String getDimensionalityType() {
+		return dimensionalityType;
 	}
 
 	public boolean isClearNamespace() {
@@ -126,9 +133,9 @@ public class AccumuloCommandLineOptions
 
 	public Index getIndex(
 			final Index[] supportedIndices ) {
+		final IndexCompatibilityVisitor compatibilityVisitor = getSelectedIndexCompatibility(getDimensionalityType());
 		for (final Index i : supportedIndices) {
-			if (i.getDimensionalityType().equals(
-					type)) {
+			if (compatibilityVisitor.isCompatible(i)) {
 				return i;
 			}
 		}
@@ -159,28 +166,24 @@ public class AccumuloCommandLineOptions
 		final String namespace = commandLine.getOptionValue(
 				"n",
 				"");
-		final String typeValue = commandLine.getOptionValue(
+		final String dimensionalityType = commandLine.getOptionValue(
 				"dim",
-				"spatial");
-		DimensionalityType type = DimensionalityType.SPATIAL;
-		if (typeValue.equalsIgnoreCase("spatial-temporal")) {
-			type = DimensionalityType.SPATIAL_TEMPORAL;
-		}
+				getDefaultDimensionalityType());
 		if (zookeepers == null) {
 			success = false;
-			LOGGER.fatal("Zookeeper URL not set");
+			LOGGER.error("Zookeeper URL not set");
 		}
 		if (instanceId == null) {
 			success = false;
-			LOGGER.fatal("Accumulo instance ID not set");
+			LOGGER.error("Accumulo instance ID not set");
 		}
 		if (user == null) {
 			success = false;
-			LOGGER.fatal("Accumulo user ID not set");
+			LOGGER.error("Accumulo user ID not set");
 		}
 		if (password == null) {
 			success = false;
-			LOGGER.fatal("Accumulo password not set");
+			LOGGER.error("Accumulo password not set");
 		}
 		if (!success) {
 			throw new ParseException(
@@ -195,10 +198,10 @@ public class AccumuloCommandLineOptions
 					namespace,
 					visibility,
 					clearNamespace,
-					type);
+					dimensionalityType);
 		}
 		catch (AccumuloException | AccumuloSecurityException e) {
-			LOGGER.fatal(
+			LOGGER.error(
 					"Unable to connect to Accumulo with the specified options",
 					e);
 		}
@@ -235,7 +238,7 @@ public class AccumuloCommandLineOptions
 				"v",
 				"visibility",
 				true,
-				"The visiblity of the data ingested (optional; default is 'public')");
+				"The visibility of the data ingested (optional; default is 'public')");
 		allOptions.addOption(visibility);
 
 		final Option namespace = new Option(
@@ -244,16 +247,94 @@ public class AccumuloCommandLineOptions
 				true,
 				"The table namespace (optional; default is no namespace)");
 		allOptions.addOption(namespace);
-		final Option indexType = new Option(
+		final Option dimensionalityType = new Option(
 				"dim",
 				"dimensionality",
 				true,
-				"The dimensionality type for the index, either 'spatial' or 'spatial-temporal' (optional; default is 'spatial')");
-		allOptions.addOption(indexType);
+				"The preferred dimensionality type to index the data for this ingest operation. " + getDimensionalityTypeOptionDescription());
+		allOptions.addOption(dimensionalityType);
 		allOptions.addOption(new Option(
 				"c",
 				"clear",
 				false,
 				"Clear ALL data stored with the same prefix as this namespace (optional; default is to append data to the namespace if it exists)"));
+	}
+
+	private static synchronized String getDimensionalityTypeOptionDescription() {
+		if (registeredDimensionalityTypes == null) {
+			initDimensionalityTypeRegistry();
+		}
+		if (registeredDimensionalityTypes.isEmpty()) {
+			return "There are no registered dimensionality types.  The supported index listed first for any given data type will be used.";
+		}
+		final StringBuilder builder = new StringBuilder();
+		for (final String dimType : registeredDimensionalityTypes.keySet()) {
+			if (builder.length() > 0) {
+				builder.append(",");
+			}
+			else {
+				builder.append("Options include: ");
+			}
+			builder.append(
+					"'").append(
+					dimType).append(
+					"'");
+		}
+		builder.append(
+				"(optional; default is '").append(
+				defaultDimensionalityType).append(
+				"')");
+		return builder.toString();
+	}
+
+	private static String getDefaultDimensionalityType() {
+		if (registeredDimensionalityTypes == null) {
+			initDimensionalityTypeRegistry();
+		}
+		if (defaultDimensionalityType == null) {
+			return "";
+		}
+		return defaultDimensionalityType;
+	}
+
+	private static IndexCompatibilityVisitor getSelectedIndexCompatibility(
+			final String dimensionalityType ) {
+		if (registeredDimensionalityTypes == null) {
+			initDimensionalityTypeRegistry();
+		}
+		final IndexCompatibilityVisitor compatibilityVisitor = registeredDimensionalityTypes.get(dimensionalityType);
+		if (compatibilityVisitor == null) {
+			return new IndexCompatibilityVisitor() {
+
+				@Override
+				public boolean isCompatible(
+						final Index index ) {
+					return true;
+				}
+			};
+		}
+		return compatibilityVisitor;
+	}
+
+	private static synchronized void initDimensionalityTypeRegistry() {
+		registeredDimensionalityTypes = new HashMap<String, IndexCompatibilityVisitor>();
+		final Iterator<IngestDimensionalityTypeProviderSpi> dimensionalityTypesProviders = ServiceLoader.load(
+				IngestDimensionalityTypeProviderSpi.class).iterator();
+		int currentDefaultPriority = Integer.MIN_VALUE;
+		while (dimensionalityTypesProviders.hasNext()) {
+			final IngestDimensionalityTypeProviderSpi dimensionalityTypeProvider = dimensionalityTypesProviders.next();
+			if (registeredDimensionalityTypes.containsKey(dimensionalityTypeProvider.getDimensionalityTypeName())) {
+				LOGGER.warn("Dimensionality type '" + dimensionalityTypeProvider.getDimensionalityTypeName() + "' already registered.  Unable to register type provided by " + dimensionalityTypeProvider.getClass().getName());
+			}
+			else {
+				registeredDimensionalityTypes.put(
+						dimensionalityTypeProvider.getDimensionalityTypeName(),
+						dimensionalityTypeProvider.getCompatibilityVisitor());
+				if (dimensionalityTypeProvider.getPriority() > currentDefaultPriority) {
+					currentDefaultPriority = dimensionalityTypeProvider.getPriority();
+					defaultDimensionalityType = dimensionalityTypeProvider.getDimensionalityTypeName();
+				}
+			}
+		}
 	}
 }

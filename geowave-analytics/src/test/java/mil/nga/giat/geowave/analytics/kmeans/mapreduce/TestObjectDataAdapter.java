@@ -5,6 +5,7 @@ import java.util.List;
 
 import mil.nga.giat.geowave.accumulo.mapreduce.HadoopDataAdapter;
 import mil.nga.giat.geowave.accumulo.mapreduce.HadoopWritableSerializer;
+import mil.nga.giat.geowave.geotime.store.dimension.GeometryWrapper;
 import mil.nga.giat.geowave.index.ByteArrayId;
 import mil.nga.giat.geowave.store.adapter.AbstractDataAdapter;
 import mil.nga.giat.geowave.store.adapter.NativeFieldHandler;
@@ -17,7 +18,6 @@ import mil.nga.giat.geowave.store.data.field.BasicWriter.GeometryWriter;
 import mil.nga.giat.geowave.store.data.field.BasicWriter.StringWriter;
 import mil.nga.giat.geowave.store.data.field.FieldReader;
 import mil.nga.giat.geowave.store.data.field.FieldWriter;
-import mil.nga.giat.geowave.store.dimension.GeometryWrapper;
 import mil.nga.giat.geowave.store.index.CommonIndexValue;
 
 import com.vividsolutions.jts.geom.Geometry;

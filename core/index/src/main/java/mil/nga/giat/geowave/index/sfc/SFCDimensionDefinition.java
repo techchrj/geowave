@@ -11,7 +11,7 @@ import mil.nga.giat.geowave.index.sfc.data.NumericRange;
 /**
  * This class wraps a dimension definition with a cardinality (bits of
  * precision) on a space filling curve
- * 
+ *
  */
 public class SFCDimensionDefinition implements
 		NumericDimensionDefinition
@@ -38,11 +38,11 @@ public class SFCDimensionDefinition implements
 
 	@Override
 	public NumericData getFullRange() {
-		return this.dimensionDefinition.getFullRange();
+		return dimensionDefinition.getFullRange();
 	}
 
 	/**
-	 * 
+	 *
 	 * @return bitsOfPrecision the bits of precision for the dimension object
 	 */
 	public int getBitsOfPrecision() {
@@ -50,7 +50,7 @@ public class SFCDimensionDefinition implements
 	}
 
 	/**
-	 * 
+	 *
 	 * @param range
 	 *            numeric data to be normalized
 	 * @return a BinRange[] based on numeric data
@@ -153,5 +153,11 @@ public class SFCDimensionDefinition implements
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public boolean isCompatibleDefinition(
+			final NumericDimensionDefinition otherDimensionDefinition ) {
+		return equals(otherDimensionDefinition);
 	}
 }

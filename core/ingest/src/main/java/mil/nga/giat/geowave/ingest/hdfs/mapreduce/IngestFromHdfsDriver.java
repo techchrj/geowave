@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
 import mil.nga.giat.geowave.accumulo.mapreduce.GeoWaveConfiguratorBase;
 import mil.nga.giat.geowave.ingest.AbstractIngestCommandLineDriver;
 import mil.nga.giat.geowave.ingest.AccumuloCommandLineOptions;
-import mil.nga.giat.geowave.ingest.IngestTypePluginProviderSpi;
+import mil.nga.giat.geowave.ingest.IngestFormatPluginProviderSpi;
 import mil.nga.giat.geowave.ingest.hdfs.HdfsCommandLineOptions;
 
 import org.apache.commons.cli.CommandLine;
@@ -52,7 +52,7 @@ public class IngestFromHdfsDriver extends
 	@Override
 	protected void runInternal(
 			final String[] args,
-			final List<IngestTypePluginProviderSpi<?, ?>> pluginProviders ) {
+			final List<IngestFormatPluginProviderSpi<?, ?>> pluginProviders ) {
 
 		final Path hdfsBaseDirectory = new Path(
 				hdfsOptions.getBasePath());
@@ -67,7 +67,7 @@ public class IngestFromHdfsDriver extends
 				LOGGER.fatal("HDFS base directory " + hdfsBaseDirectory + " does not exist");
 				return;
 			}
-			for (final IngestTypePluginProviderSpi<?, ?> pluginProvider : pluginProviders) {
+			for (final IngestFormatPluginProviderSpi<?, ?> pluginProvider : pluginProviders) {
 				// if an appropriate sequence file does not exist, continue
 
 				// TODO: we should probably clean up the type name to make it
@@ -88,7 +88,7 @@ public class IngestFromHdfsDriver extends
 						continue;
 					}
 					if (!accumuloOptions.isSupported(ingestFromHdfsPlugin.getSupportedIndices())) {
-						LOGGER.warn("HDFS file ingest plugin for ingest type '" + pluginProvider.getIngestTypeName() + "' does not support dimensionality '" + accumuloOptions.getType().name() + "'");
+						LOGGER.warn("HDFS file ingest plugin for ingest type '" + pluginProvider.getIngestTypeName() + "' does not support dimensionality '" + accumuloOptions.getDimensionalityType() + "'");
 						continue;
 					}
 				}

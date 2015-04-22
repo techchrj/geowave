@@ -35,22 +35,22 @@ abstract public class AbstractIngestCommandLineDriver implements
 		CLIOperationDriver
 {
 	private final static Logger LOGGER = Logger.getLogger(AbstractIngestCommandLineDriver.class);
-	final protected Map<String, IngestTypePluginProviderSpi<?, ?>> pluginProviderRegistry;
+	final protected Map<String, IngestFormatPluginProviderSpi<?, ?>> pluginProviderRegistry;
 	private final String operation;
 
 	public AbstractIngestCommandLineDriver(
 			final String operation ) {
 		super();
-		pluginProviderRegistry = new HashMap<String, IngestTypePluginProviderSpi<?, ?>>();
+		pluginProviderRegistry = new HashMap<String, IngestFormatPluginProviderSpi<?, ?>>();
 		this.operation = operation;
 		initPluginProviderRegistry();
 	}
 
 	private void initPluginProviderRegistry() {
-		final Iterator<IngestTypePluginProviderSpi> pluginProviders = ServiceLoader.load(
-				IngestTypePluginProviderSpi.class).iterator();
+		final Iterator<IngestFormatPluginProviderSpi> pluginProviders = ServiceLoader.load(
+				IngestFormatPluginProviderSpi.class).iterator();
 		while (pluginProviders.hasNext()) {
-			final IngestTypePluginProviderSpi pluginProvider = pluginProviders.next();
+			final IngestFormatPluginProviderSpi pluginProvider = pluginProviders.next();
 			pluginProviderRegistry.put(
 					cleanIngestTypeName(pluginProvider.getIngestTypeName()),
 					pluginProvider);
@@ -72,16 +72,16 @@ abstract public class AbstractIngestCommandLineDriver implements
 	public void run(
 			final String[] args )
 			throws ParseException {
-		final List<IngestTypePluginProviderSpi<?, ?>> pluginProviders = applyArguments(args);
+		final List<IngestFormatPluginProviderSpi<?, ?>> pluginProviders = applyArguments(args);
 		runInternal(
 				args,
 				pluginProviders);
 	}
 
 	@SuppressFBWarnings(value = "DM_EXIT", justification = "Exiting JVM with System.exit(0) is intentional")
-	protected List<IngestTypePluginProviderSpi<?, ?>> applyArguments(
+	protected List<IngestFormatPluginProviderSpi<?, ?>> applyArguments(
 			final String[] args ) {
-		List<IngestTypePluginProviderSpi<?, ?>> selectedPluginProviders = new ArrayList<IngestTypePluginProviderSpi<?, ?>>();
+		List<IngestFormatPluginProviderSpi<?, ?>> selectedPluginProviders = new ArrayList<IngestFormatPluginProviderSpi<?, ?>>();
 		final Options options = new Options();
 		final OptionGroup baseOptionGroup = new OptionGroup();
 		baseOptionGroup.setRequired(false);
@@ -96,10 +96,10 @@ abstract public class AbstractIngestCommandLineDriver implements
 				false,
 				"List the available ingest types"));
 		baseOptionGroup.addOption(new Option(
-				"t",
-				"types",
+				"f",
+				"formats",
 				true,
-				"Explicitly set the ingest type by name (or multiple comma-delimited types), if not set all available ingest types will be used"));
+				"Explicitly set the ingest formats by name (or multiple comma-delimited types), if not set all available ingest types will be used"));
 		options.addOptionGroup(baseOptionGroup);
 		applyOptionsInternal(options);
 		final int optionCount = options.getOptions().size();
@@ -121,8 +121,8 @@ abstract public class AbstractIngestCommandLineDriver implements
 								System.out,
 								StringUtils.UTF8_CHAR_SET));
 				pw.println("Available ingest types currently registered as plugins:\n");
-				for (final Entry<String, IngestTypePluginProviderSpi<?, ?>> pluginProviderEntry : pluginProviderRegistry.entrySet()) {
-					final IngestTypePluginProviderSpi<?, ?> pluginProvider = pluginProviderEntry.getValue();
+				for (final Entry<String, IngestFormatPluginProviderSpi<?, ?>> pluginProviderEntry : pluginProviderRegistry.entrySet()) {
+					final IngestFormatPluginProviderSpi<?, ?> pluginProvider = pluginProviderEntry.getValue();
 					final String desc = pluginProvider.getIngestTypeDescription() == null ? "no description" : pluginProvider.getIngestTypeDescription();
 					final String text = pluginProviderEntry.getKey() + ":\n" + desc;
 
@@ -136,7 +136,7 @@ abstract public class AbstractIngestCommandLineDriver implements
 				pw.flush();
 				System.exit(0);
 			}
-			else if (commandLine.hasOption("t")) {
+			else if (commandLine.hasOption("f")) {
 				try {
 					selectedPluginProviders = getPluginProviders(
 							commandLine,
@@ -162,8 +162,8 @@ abstract public class AbstractIngestCommandLineDriver implements
 				commandLine = parser.parse(
 						options,
 						args);
-				for (final IngestTypePluginProviderSpi<?, ?> plugin : selectedPluginProviders) {
-					final IngestTypeOptionProvider optionProvider = plugin.getIngestTypeOptionProvider();
+				for (final IngestFormatPluginProviderSpi<?, ?> plugin : selectedPluginProviders) {
+					final IngestFormatOptionProvider optionProvider = plugin.getIngestTypeOptionProvider();
 					if (optionProvider != null) {
 						optionProvider.parseOptions(commandLine);
 					}
@@ -183,15 +183,15 @@ abstract public class AbstractIngestCommandLineDriver implements
 		return selectedPluginProviders;
 	}
 
-	private List<IngestTypePluginProviderSpi<?, ?>> getPluginProviders(
+	private List<IngestFormatPluginProviderSpi<?, ?>> getPluginProviders(
 			final CommandLine commandLine,
 			final Options options ) {
-		final List<IngestTypePluginProviderSpi<?, ?>> selectedPluginProviders = new ArrayList<IngestTypePluginProviderSpi<?, ?>>();
+		final List<IngestFormatPluginProviderSpi<?, ?>> selectedPluginProviders = new ArrayList<IngestFormatPluginProviderSpi<?, ?>>();
 		final String[] pluginProviderNames = commandLine.getOptionValue(
 				"t").split(
 				",");
 		for (final String pluginProviderName : pluginProviderNames) {
-			final IngestTypePluginProviderSpi<?, ?> pluginProvider = pluginProviderRegistry.get(pluginProviderName);
+			final IngestFormatPluginProviderSpi<?, ?> pluginProvider = pluginProviderRegistry.get(pluginProviderName);
 			if (pluginProvider == null) {
 				throw new IllegalArgumentException(
 						"Unable to find SPI plugin provider for ingest type '" + pluginProviderName + "'");
@@ -202,8 +202,8 @@ abstract public class AbstractIngestCommandLineDriver implements
 			throw new IllegalArgumentException(
 					"There were no ingest type plugin providers found");
 		}
-		for (final IngestTypePluginProviderSpi<?, ?> plugin : selectedPluginProviders) {
-			final IngestTypeOptionProvider optionProvider = plugin.getIngestTypeOptionProvider();
+		for (final IngestFormatPluginProviderSpi<?, ?> plugin : selectedPluginProviders) {
+			final IngestFormatOptionProvider optionProvider = plugin.getIngestTypeOptionProvider();
 			if (optionProvider != null) {
 				optionProvider.applyOptions(options);
 			}
@@ -231,5 +231,5 @@ abstract public class AbstractIngestCommandLineDriver implements
 
 	abstract protected void runInternal(
 			String[] args,
-			List<IngestTypePluginProviderSpi<?, ?>> pluginProviders );
+			List<IngestFormatPluginProviderSpi<?, ?>> pluginProviders );
 }

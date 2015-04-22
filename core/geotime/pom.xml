@@ -3,7 +3,8 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>mil.nga.giat</groupId>
-		<artifactId>geowave-parent</artifactId>
+		<artifactId>geowave-core</artifactId>
+		<relativePath>../</relativePath>
 		<version>0.8.6-SNAPSHOT</version>
 	</parent>
 	<artifactId>geowave-geotime</artifactId>
@@ -13,10 +14,20 @@
 			<groupId>com.vividsolutions</groupId>
 			<artifactId>jts</artifactId>
 		</dependency>
+		<!--we can switch the dependency from store to ingest when accumulo becomes 
+			a pluggable data store and is no longer a dependency on ingest -->
 		<dependency>
 			<groupId>mil.nga.giat</groupId>
 			<artifactId>geowave-store</artifactId>
 			<version>${project.version}</version>
+		</dependency>
+		<!-- <dependency> <groupId>mil.nga.giat</groupId> <artifactId>geowave-ingest</artifactId> 
+			<version>${project.version}</version> </dependency> -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.4</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 </project>
