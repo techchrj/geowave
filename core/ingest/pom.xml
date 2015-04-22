@@ -3,13 +3,13 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<artifactId>geowave-parent</artifactId>
+		<artifactId>geowave-core-parent</artifactId>
 		<groupId>mil.nga.giat</groupId>
 		<relativePath>../</relativePath>
 		<version>0.8.6-SNAPSHOT</version>
 	</parent>
-	<artifactId>geowave-ingest</artifactId>
-	<name>ingest</name>
+	<artifactId>geowave-core-ingest</artifactId>
+	<name>GeoWave Ingest Framework</name>
 	<dependencies>
 		<dependency>
 			<groupId>org.geotools</groupId>
@@ -45,12 +45,12 @@
 		</dependency>
 		<dependency>
 			<groupId>mil.nga.giat</groupId>
-			<artifactId>geowave-cli</artifactId>
+			<artifactId>geowave-core-cli</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>mil.nga.giat</groupId>
-			<artifactId>geowave-accumulo</artifactId>
+			<artifactId>geowave-datastore-accumulo</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 	</dependencies>
