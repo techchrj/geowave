@@ -3,6 +3,9 @@ package mil.nga.giat.geowave.accumulo.util;
 import org.apache.accumulo.core.data.Key;
 import org.apache.accumulo.core.data.Value;
 
+/**
+ * Immutable wrapper object containing a single Accumulo [Key,Value] Pair
+ */
 public class AccumuloKeyValuePair
 {
 	private final Key key;
