@@ -13,7 +13,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>mil.nga.giat</groupId>
-			<artifactId>geowave-types</artifactId>
+			<artifactId>geowave-vector-format</artifactId>
 			<version>${project.version}</version>
 			<exclusions>
 				<exclusion>
@@ -24,26 +24,46 @@
 					<groupId>com.sun.jersey</groupId>
 					<artifactId>jersey-server</artifactId>
 				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>mil.nga.giat</groupId>
+			<artifactId>geowave-raster-format</artifactId>
+			<version>${project.version}</version>
+			<exclusions>
 				<exclusion>
-					<artifactId>hsqldb</artifactId>
-					<groupId>hsqldb</groupId>
+					<groupId>com.sun.jersey</groupId>
+					<artifactId>jersey-core</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.sun.jersey</groupId>
+					<artifactId>jersey-server</artifactId>
 				</exclusion>
 			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>mil.nga.giat</groupId>
-			<artifactId>geowave-services</artifactId>
+			<artifactId>geowave-gpx-format</artifactId>
 			<version>${project.version}</version>
-			<type>pom</type>
+			<exclusions>
+				<exclusion>
+					<groupId>com.sun.jersey</groupId>
+					<artifactId>jersey-core</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.sun.jersey</groupId>
+					<artifactId>jersey-server</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>mil.nga.giat</groupId>
-			<artifactId>geowave-analytics</artifactId>
+			<artifactId>geowave-analytic-mapreduce</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>mil.nga.giat</groupId>
-			<artifactId>geowave-examples</artifactId>
+			<artifactId>geowave-example</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
@@ -94,7 +114,7 @@
 							<artifactItems>
 								<artifactItem>
 									<groupId>mil.nga.giat</groupId>
-									<artifactId>geowave-services</artifactId>
+									<artifactId>geowave-service-webapp</artifactId>
 									<version>${project.version}</version>
 									<type>war</type>
 									<overWrite>true</overWrite>

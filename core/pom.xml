@@ -7,8 +7,8 @@
 		<relativePath>../</relativePath>
 		<version>0.8.6-SNAPSHOT</version>
 	</parent>
-	<artifactId>geowave-core</artifactId>
-	<name>GeoWave Core</name>
+	<artifactId>geowave-core-parent</artifactId>
+	<name>GeoWave Core Parent POM</name>
 	<description>The set of base functionality provided for all configurations of GeoWave</description>	
 	<packaging>pom</packaging>
 	<modules>

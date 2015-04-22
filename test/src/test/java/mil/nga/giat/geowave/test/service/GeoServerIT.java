@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
 
 import javax.ws.rs.core.Response.Status;
 
-import mil.nga.giat.geowave.services.clients.GeoserverServiceClient;
+import mil.nga.giat.geowave.client.GeoserverServiceClient;
 
 import org.apache.accumulo.core.client.AccumuloException;
 import org.apache.accumulo.core.client.AccumuloSecurityException;

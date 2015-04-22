@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>mil.nga.giat</groupId>
-		<artifactId>geowave-core</artifactId>
+		<artifactId>geowave-core-parent</artifactId>
 		<relativePath>../</relativePath>
 		<version>0.8.6-SNAPSHOT</version>
 	</parent>

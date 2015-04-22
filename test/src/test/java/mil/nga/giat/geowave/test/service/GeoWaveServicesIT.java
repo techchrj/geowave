@@ -6,10 +6,10 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
+import mil.nga.giat.geowave.client.GeoserverServiceClient;
+import mil.nga.giat.geowave.client.InfoServiceClient;
+import mil.nga.giat.geowave.client.IngestServiceClient;
 import mil.nga.giat.geowave.geotime.IndexType;
-import mil.nga.giat.geowave.services.clients.GeoserverServiceClient;
-import mil.nga.giat.geowave.services.clients.InfoServiceClient;
-import mil.nga.giat.geowave.services.clients.IngestServiceClient;
 import mil.nga.giat.geowave.test.GeoWaveTestEnvironment;
 import mil.nga.giat.geowave.test.mapreduce.MapReduceTestEnvironment;
 import mil.nga.giat.geowave.types.gpx.GpxUtils;

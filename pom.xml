@@ -43,6 +43,7 @@
 		<accumulo.scope>compile</accumulo.scope>
 		<hadoop.scope>compile</hadoop.scope>
 		<zookeeper.version>3.4.6</zookeeper.version>
+		<jersey.version>2.14</jersey.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<sonar.language>java</sonar.language>
@@ -252,6 +253,31 @@
 				<version>3.0.0</version>
 				<scope>compile</scope>
 			</dependency>
+		<dependency>
+			<groupId>org.glassfish.jersey.media</groupId>
+			<artifactId>jersey-media-multipart</artifactId>
+			<version>${jersey.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jersey.core</groupId>
+			<artifactId>jersey-client</artifactId>
+			<version>${jersey.version}</version>
+		</dependency>		
+		<dependency>
+			<groupId>org.glassfish.jersey.containers</groupId>
+			<artifactId>jersey-container-servlet</artifactId>
+			<version>${jersey.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jersey.media</groupId>
+			<artifactId>jersey-media-json-jackson</artifactId>
+			<version>${jersey.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jersey.ext</groupId>
+			<artifactId>jersey-proxy-client</artifactId>
+			<version>${jersey.version}</version>
+		</dependency>
 		</dependencies>
 	</dependencyManagement>
 	<build>
@@ -551,15 +577,14 @@
 		</plugins>
 	</build>
 	<modules>
+		<module>analytic</module>
 		<module>core</module>
+		<module>deploy</module>
+		<module>doc</module>
+		<module>example</module>
 		<module>extension</module>
-		<module>geowave-analytics</module>
-		<module>geowave-utils</module>
-		<module>geowave-client</module>
-		<module>geowave-services</module>
-		<module>geowave-deploy</module>
-		<module>geowave-test</module>
-		<module>geowave-examples</module>
+		<module>service</module>
+		<module>test</module>
 	</modules>
 	<repositories>
 		<repository>

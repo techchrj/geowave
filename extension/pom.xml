@@ -12,10 +12,13 @@
 	<description>The set of extended capabilities supported for GeoWave</description>	
 	<packaging>pom</packaging>
 	<modules>
-		<module>datastore/accumulo</module>
-		<module>adapter/vector</module>
 		<module>adapter/raster</module>
-		<module>format/geotools-vector</module>
+		<module>adapter/vector</module>
+		<module>datastore/accumulo</module>
+		<module>format/geolife</module>
 		<module>format/geotools-raster</module>
+		<module>format/geotools-vector</module>
+		<module>format/gpx</module>
+		<module>format/tdrive</module>
 	</modules>
 </project>
