@@ -31,9 +31,11 @@ public class BulkIngestMapper extends
 		Mapper<Text, Text, Key, Value>
 {
 	private static final String FEATURE_NAME = "GeonamesPoint";
+
 	private static enum Counters {
 		FEATURE_ID_COUNTER
 	};
+
 	private SimpleFeatureType geonamesPointType;
 	private SimpleFeatureBuilder builder;
 	private WritableDataAdapter<SimpleFeature> adapter;

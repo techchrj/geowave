@@ -15,7 +15,7 @@ import org.apache.accumulo.core.data.Key;
 import org.apache.accumulo.core.data.Value;
 
 /**
- *
+ * 
  * Given a {@link WritableDataAdapter} and an {@link Index}, this class handles
  * the creation of Geowave-formatted [Key,Value] pairs.
  * 
@@ -23,7 +23,7 @@ import org.apache.accumulo.core.data.Value;
  * job to generate Keys and Values to be sorted during the shuffle-and-sort
  * phase in preparation for bulk ingest into Accumulo via
  * {@link AccumuloFileOutputFormat}.
- *
+ * 
  * @param <T>
  *            the type of entries to index within Geowave
  */
