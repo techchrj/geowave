@@ -77,20 +77,24 @@ public class BulkIngestMapper extends
 		context.getCounter(
 				Counters.FEATURE_ID_COUNTER).increment(
 				1);
+
 		geonamesEntryTokens = value.toString().split(
 				"\\t"); // Exported Geonames entries are tab-delimited
 		location = geonamesEntryTokens[1];
 		latitude = Double.parseDouble(geonamesEntryTokens[4]);
 		longitude = Double.parseDouble(geonamesEntryTokens[5]);
+
 		simpleFeature = buildSimpleFeature(
 				Long.toString(context.getCounter(
 						Counters.FEATURE_ID_COUNTER).getValue()),
 				longitude,
 				latitude,
 				location);
+
 		keyValuePairs = generator.constructKeyValuePairs(
 				adapter.getAdapterId().getBytes(),
 				simpleFeature);
+
 		for (AccumuloKeyValuePair accumuloKeyValuePair : keyValuePairs) {
 			context.write(
 					accumuloKeyValuePair.getKey(),
