@@ -3,11 +3,12 @@ package mil.nga.giat.geowave.examples.ingest.bulk;
 import java.io.IOException;
 
 import org.apache.hadoop.io.LongWritable;
+import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.InputSplit;
 import org.apache.hadoop.mapreduce.RecordReader;
 import org.apache.hadoop.mapreduce.TaskAttemptContext;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
-import org.opengis.feature.simple.SimpleFeature;
+import org.apache.hadoop.mapreduce.lib.input.LineRecordReader;
 
 /**
  * GeoNames provides exports by country (see <a
@@ -16,14 +17,14 @@ import org.opengis.feature.simple.SimpleFeature;
  * tab-delimited entry per line.
  */
 public class GeonamesExportFileInputFormat extends
-		FileInputFormat<LongWritable, SimpleFeature>
+		FileInputFormat<LongWritable, Text>
 {
 	@Override
-	public RecordReader<LongWritable, SimpleFeature> createRecordReader(
+	public RecordReader<LongWritable, Text> createRecordReader(
 			InputSplit split,
 			TaskAttemptContext context )
 			throws IOException,
 			InterruptedException {
-		return new GeonamesRecordReader();
+		return new LineRecordReader();
 	}
 }
