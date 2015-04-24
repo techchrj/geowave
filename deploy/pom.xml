@@ -8,7 +8,7 @@
 		<version>0.8.6-SNAPSHOT</version>
 	</parent>
 	<artifactId>geowave-deploy</artifactId>
-	<name>geowave-deploy</name>
+	<name>GeoWave Deployment Configurations</name>
 	<properties>
 		<maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ssZ</maven.build.timestamp.format>
 		<build.timestamp>${maven.build.timestamp}</build.timestamp>

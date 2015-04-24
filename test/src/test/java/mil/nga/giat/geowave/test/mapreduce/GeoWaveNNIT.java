@@ -2,23 +2,23 @@ package mil.nga.giat.geowave.test.mapreduce;
 
 import java.io.IOException;
 
-import mil.nga.giat.geowave.analytics.distance.FeatureCentroidOrthodromicDistanceFn;
-import mil.nga.giat.geowave.analytics.mapreduce.nn.NNJobRunner;
-import mil.nga.giat.geowave.analytics.parameters.ClusteringParameters;
-import mil.nga.giat.geowave.analytics.parameters.ExtractParameters;
-import mil.nga.giat.geowave.analytics.parameters.GlobalParameters;
-import mil.nga.giat.geowave.analytics.parameters.InputParameters;
-import mil.nga.giat.geowave.analytics.parameters.MapReduceParameters;
-import mil.nga.giat.geowave.analytics.parameters.OutputParameters;
-import mil.nga.giat.geowave.analytics.parameters.ParameterEnum;
-import mil.nga.giat.geowave.analytics.parameters.PartitionParameters;
-import mil.nga.giat.geowave.analytics.tools.GeometryDataSetGenerator;
-import mil.nga.giat.geowave.analytics.tools.PropertyManagement;
-import mil.nga.giat.geowave.analytics.tools.mapreduce.GeoWaveInputFormatConfiguration;
-import mil.nga.giat.geowave.analytics.tools.mapreduce.SequenceFileOutputFormatConfiguration;
-import mil.nga.giat.geowave.analytics.tools.partitioners.OrthodromicDistancePartitioner;
-import mil.nga.giat.geowave.geotime.store.query.SpatialQuery;
-import mil.nga.giat.geowave.store.query.DistributableQuery;
+import mil.nga.giat.geowave.analytic.GeometryDataSetGenerator;
+import mil.nga.giat.geowave.analytic.PropertyManagement;
+import mil.nga.giat.geowave.analytic.distance.FeatureCentroidOrthodromicDistanceFn;
+import mil.nga.giat.geowave.analytic.mapreduce.GeoWaveInputFormatConfiguration;
+import mil.nga.giat.geowave.analytic.mapreduce.SequenceFileOutputFormatConfiguration;
+import mil.nga.giat.geowave.analytic.mapreduce.nn.NNJobRunner;
+import mil.nga.giat.geowave.analytic.param.ClusteringParameters;
+import mil.nga.giat.geowave.analytic.param.ExtractParameters;
+import mil.nga.giat.geowave.analytic.param.GlobalParameters;
+import mil.nga.giat.geowave.analytic.param.InputParameters;
+import mil.nga.giat.geowave.analytic.param.MapReduceParameters;
+import mil.nga.giat.geowave.analytic.param.OutputParameters;
+import mil.nga.giat.geowave.analytic.param.ParameterEnum;
+import mil.nga.giat.geowave.analytic.param.PartitionParameters;
+import mil.nga.giat.geowave.analytic.partitioner.OrthodromicDistancePartitioner;
+import mil.nga.giat.geowave.core.geotime.store.query.SpatialQuery;
+import mil.nga.giat.geowave.core.store.query.DistributableQuery;
 
 import org.apache.hadoop.fs.FileStatus;
 import org.apache.hadoop.fs.FileSystem;
@@ -130,18 +130,18 @@ public class GeoWaveNNIT extends
 			throws IllegalArgumentException,
 			IOException {
 		int count = 0;
-		FileSystem fs = FileSystem.get(getConfiguration());
-		FileStatus[] fss = fs.listStatus(new Path(
+		final FileSystem fs = FileSystem.get(getConfiguration());
+		final FileStatus[] fss = fs.listStatus(new Path(
 				hdfsBaseDirectory + "/t1/pairs"));
-		for (FileStatus ifs : fss) {
+		for (final FileStatus ifs : fss) {
 			if (ifs.isFile() && ifs.getPath().toString().matches(
 					".*part-r-0000[0-9]")) {
 				try (SequenceFile.Reader reader = new SequenceFile.Reader(
 						getConfiguration(),
 						Reader.file(ifs.getPath()))) {
 
-					Text key = new Text();
-					Text val = new Text();
+					final Text key = new Text();
+					final Text val = new Text();
 
 					while (reader.next(
 							key,

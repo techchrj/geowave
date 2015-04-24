@@ -7,12 +7,12 @@
 		<relativePath>../</relativePath>
 		<version>0.8.6-SNAPSHOT</version>
 	</parent>
-	<artifactId>geowave-store</artifactId>
+	<artifactId>geowave-core-store</artifactId>
 	<name>GeoWave Store</name>
 	<dependencies>
 		<dependency>
 			<groupId>mil.nga.giat</groupId>
-			<artifactId>geowave-index</artifactId>
+			<artifactId>geowave-core-index</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>

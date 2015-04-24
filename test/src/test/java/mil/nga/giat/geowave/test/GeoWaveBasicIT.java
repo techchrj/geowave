@@ -12,36 +12,36 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import mil.nga.giat.geowave.accumulo.AccumuloDataStore;
-import mil.nga.giat.geowave.accumulo.metadata.AccumuloAdapterStore;
-import mil.nga.giat.geowave.accumulo.metadata.AccumuloDataStatisticsStore;
-import mil.nga.giat.geowave.accumulo.metadata.AccumuloIndexStore;
-import mil.nga.giat.geowave.accumulo.util.AccumuloUtils;
-import mil.nga.giat.geowave.geotime.GeometryUtils;
-import mil.nga.giat.geowave.geotime.IndexType;
-import mil.nga.giat.geowave.geotime.store.query.SpatialQuery;
-import mil.nga.giat.geowave.geotime.store.statistics.BoundingBoxDataStatistics;
-import mil.nga.giat.geowave.index.ByteArrayId;
-import mil.nga.giat.geowave.ingest.GeoWaveData;
-import mil.nga.giat.geowave.ingest.IngestMain;
-import mil.nga.giat.geowave.ingest.local.LocalFileIngestPlugin;
-import mil.nga.giat.geowave.store.CloseableIterator;
-import mil.nga.giat.geowave.store.DataStoreEntryInfo;
-import mil.nga.giat.geowave.store.IngestCallback;
-import mil.nga.giat.geowave.store.adapter.AdapterStore;
-import mil.nga.giat.geowave.store.adapter.DataAdapter;
-import mil.nga.giat.geowave.store.adapter.MemoryAdapterStore;
-import mil.nga.giat.geowave.store.adapter.WritableDataAdapter;
-import mil.nga.giat.geowave.store.adapter.statistics.DataStatistics;
-import mil.nga.giat.geowave.store.adapter.statistics.DataStatisticsStore;
-import mil.nga.giat.geowave.store.adapter.statistics.StatisticalDataAdapter;
-import mil.nga.giat.geowave.store.data.visibility.GlobalVisibilityHandler;
-import mil.nga.giat.geowave.store.data.visibility.UniformVisibilityWriter;
-import mil.nga.giat.geowave.store.index.Index;
-import mil.nga.giat.geowave.store.query.DistributableQuery;
-import mil.nga.giat.geowave.types.geotools.vector.GeoToolsVectorDataStoreIngestPlugin;
-import mil.nga.giat.geowave.vector.adapter.FeatureDataAdapter;
-import mil.nga.giat.geowave.vector.stats.FeatureBoundingBoxStatistics;
+import mil.nga.giat.geowave.adapter.vector.FeatureDataAdapter;
+import mil.nga.giat.geowave.adapter.vector.stats.FeatureBoundingBoxStatistics;
+import mil.nga.giat.geowave.core.cli.GeoWaveMain;
+import mil.nga.giat.geowave.core.geotime.GeometryUtils;
+import mil.nga.giat.geowave.core.geotime.IndexType;
+import mil.nga.giat.geowave.core.geotime.store.query.SpatialQuery;
+import mil.nga.giat.geowave.core.geotime.store.statistics.BoundingBoxDataStatistics;
+import mil.nga.giat.geowave.core.index.ByteArrayId;
+import mil.nga.giat.geowave.core.ingest.GeoWaveData;
+import mil.nga.giat.geowave.core.ingest.local.LocalFileIngestPlugin;
+import mil.nga.giat.geowave.core.store.CloseableIterator;
+import mil.nga.giat.geowave.core.store.DataStoreEntryInfo;
+import mil.nga.giat.geowave.core.store.IngestCallback;
+import mil.nga.giat.geowave.core.store.adapter.AdapterStore;
+import mil.nga.giat.geowave.core.store.adapter.DataAdapter;
+import mil.nga.giat.geowave.core.store.adapter.MemoryAdapterStore;
+import mil.nga.giat.geowave.core.store.adapter.WritableDataAdapter;
+import mil.nga.giat.geowave.core.store.adapter.statistics.DataStatistics;
+import mil.nga.giat.geowave.core.store.adapter.statistics.DataStatisticsStore;
+import mil.nga.giat.geowave.core.store.adapter.statistics.StatisticalDataAdapter;
+import mil.nga.giat.geowave.core.store.data.visibility.GlobalVisibilityHandler;
+import mil.nga.giat.geowave.core.store.data.visibility.UniformVisibilityWriter;
+import mil.nga.giat.geowave.core.store.index.Index;
+import mil.nga.giat.geowave.core.store.query.DistributableQuery;
+import mil.nga.giat.geowave.datastore.accumulo.AccumuloDataStore;
+import mil.nga.giat.geowave.datastore.accumulo.metadata.AccumuloAdapterStore;
+import mil.nga.giat.geowave.datastore.accumulo.metadata.AccumuloDataStatisticsStore;
+import mil.nga.giat.geowave.datastore.accumulo.metadata.AccumuloIndexStore;
+import mil.nga.giat.geowave.datastore.accumulo.util.AccumuloUtils;
+import mil.nga.giat.geowave.format.geotools.vector.GeoToolsVectorDataStoreIngestPlugin;
 
 import org.apache.accumulo.core.client.AccumuloException;
 import org.apache.accumulo.core.client.AccumuloSecurityException;
@@ -244,7 +244,7 @@ public class GeoWaveBasicIT extends
 						entry);
 			}
 			final Geometry geometry = ((Geometry) entry.getDefaultGeometry());
-			if (geometry != null && !geometry.isEmpty()) {
+			if ((geometry != null) && !geometry.isEmpty()) {
 				minX = Math.min(
 						minX,
 						geometry.getEnvelopeInternal().getMinX());
@@ -622,7 +622,7 @@ public class GeoWaveBasicIT extends
 					arg.getValue());
 		}
 
-		final mil.nga.giat.geowave.store.DataStore geowaveStore = new AccumuloDataStore(
+		final mil.nga.giat.geowave.core.store.DataStore geowaveStore = new AccumuloDataStore(
 				new AccumuloIndexStore(
 						accumuloOperations),
 				new AccumuloAdapterStore(
@@ -739,7 +739,7 @@ public class GeoWaveBasicIT extends
 		final String[] args = StringUtils.split(
 				"-localingest -f geotools-vector -b " + ingestFilePath + " -z " + zookeeper + " -i " + accumuloInstance + " -u " + accumuloUser + " -p " + accumuloPassword + " -n " + TEST_NAMESPACE + " -dim " + (indexType.equals(IndexType.SPATIAL_VECTOR) ? "spatial" : "spatial-temporal"),
 				' ');
-		IngestMain.main(args);
+		GeoWaveMain.main(args);
 	}
 
 	private void testQuery(
@@ -763,7 +763,7 @@ public class GeoWaveBasicIT extends
 			throws Exception {
 		LOGGER.info("querying " + queryDescription);
 		System.out.println("querying " + queryDescription);
-		final mil.nga.giat.geowave.store.DataStore geowaveStore = new AccumuloDataStore(
+		final mil.nga.giat.geowave.core.store.DataStore geowaveStore = new AccumuloDataStore(
 				new AccumuloIndexStore(
 						accumuloOperations),
 				new AccumuloAdapterStore(
@@ -830,7 +830,7 @@ public class GeoWaveBasicIT extends
 		LOGGER.info("deleting from " + indexType.toString() + " index");
 		System.out.println("deleting from " + indexType.toString() + " index");
 		boolean success = false;
-		final mil.nga.giat.geowave.store.DataStore geowaveStore = new AccumuloDataStore(
+		final mil.nga.giat.geowave.core.store.DataStore geowaveStore = new AccumuloDataStore(
 				new AccumuloIndexStore(
 						accumuloOperations),
 				new AccumuloAdapterStore(

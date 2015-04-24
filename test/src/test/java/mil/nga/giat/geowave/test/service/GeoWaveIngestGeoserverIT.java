@@ -1,13 +1,13 @@
 package mil.nga.giat.geowave.test.service;
 
-import mil.nga.giat.geowave.accumulo.AccumuloDataStore;
-import mil.nga.giat.geowave.accumulo.BasicAccumuloOperations;
-import mil.nga.giat.geowave.client.GeoserverServiceClient;
-import mil.nga.giat.geowave.client.InfoServiceClient;
-import mil.nga.giat.geowave.client.IngestServiceClient;
+import mil.nga.giat.geowave.adapter.vector.FeatureDataAdapter;
+import mil.nga.giat.geowave.core.store.index.Index;
+import mil.nga.giat.geowave.datastore.accumulo.AccumuloDataStore;
+import mil.nga.giat.geowave.datastore.accumulo.BasicAccumuloOperations;
 import mil.nga.giat.geowave.examples.ingest.SimpleIngest;
-import mil.nga.giat.geowave.store.index.Index;
-import mil.nga.giat.geowave.vector.adapter.FeatureDataAdapter;
+import mil.nga.giat.geowave.service.client.GeoserverServiceClient;
+import mil.nga.giat.geowave.service.client.InfoServiceClient;
+import mil.nga.giat.geowave.service.client.IngestServiceClient;
 
 import org.apache.accumulo.core.client.AccumuloException;
 import org.apache.accumulo.core.client.AccumuloSecurityException;

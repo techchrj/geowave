@@ -1,12 +1,9 @@
 package mil.nga.giat.geowave.test.mapreduce;
 
-import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URISyntaxException;
 
-import mil.nga.giat.geowave.geotime.IndexType;
-import mil.nga.giat.geowave.ingest.IngestMain;
+import mil.nga.giat.geowave.core.cli.GeoWaveMain;
+import mil.nga.giat.geowave.core.geotime.IndexType;
 import mil.nga.giat.geowave.test.GeoWaveTestEnvironment;
 
 import org.apache.commons.lang.StringUtils;
@@ -45,7 +42,7 @@ abstract public class MapReduceTestEnvironment extends
 					"-hdfsingest -f gpx -hdfs " + hdfs + " -hdfsbase " + hdfsBaseDirectory + " -jobtracker " + jobtracker + " -b " + ingestFilePath + " -z " + zookeeper + " -i " + accumuloInstance + " -u " + accumuloUser + " -p " + accumuloPassword + " -n " + TEST_NAMESPACE + " -dim " + (indexType.equals(IndexType.SPATIAL_VECTOR) ? "spatial" : "spatial-temporal"),
 					' ');
 		}
-		IngestMain.main(args);
+		GeoWaveMain.main(args);
 	}
 
 	@BeforeClass
@@ -96,7 +93,7 @@ abstract public class MapReduceTestEnvironment extends
 	}
 
 	public static void filterConfiguration(
-			Configuration conf ) {
+			final Configuration conf ) {
 		// final parameters, can't be overriden
 		conf.unset("mapreduce.job.end-notification.max.retry.interval");
 		conf.unset("mapreduce.job.end-notification.max.attempts");

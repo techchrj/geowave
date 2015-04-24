@@ -8,7 +8,7 @@
 		<relativePath>../</relativePath>
 		<version>0.8.6-SNAPSHOT</version>
 	</parent>
-	<artifactId>geowave-ingest</artifactId>
+	<artifactId>geowave-core-ingest</artifactId>
 	<name>ingest</name>
 	<dependencies>
 		<dependency>
@@ -45,12 +45,12 @@
 		</dependency>
 		<dependency>
 			<groupId>mil.nga.giat</groupId>
-			<artifactId>geowave-cli</artifactId>
+			<artifactId>geowave-core-cli</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>mil.nga.giat</groupId>
-			<artifactId>geowave-accumulo</artifactId>
+			<artifactId>geowave-datastore-accumulo</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 	</dependencies>

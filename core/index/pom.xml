@@ -7,7 +7,7 @@
 		<relativePath>../</relativePath>
 		<version>0.8.6-SNAPSHOT</version>
 	</parent>
-	<artifactId>geowave-index</artifactId>
+	<artifactId>geowave-core-index</artifactId>
 	<name>GeoWave Index</name>
 	<dependencies>
 		<dependency>

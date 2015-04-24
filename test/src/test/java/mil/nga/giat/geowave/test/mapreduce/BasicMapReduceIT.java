@@ -13,24 +13,24 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import mil.nga.giat.geowave.accumulo.AccumuloDataStore;
-import mil.nga.giat.geowave.accumulo.mapreduce.GeoWaveConfiguratorBase;
-import mil.nga.giat.geowave.accumulo.mapreduce.GeoWaveWritableInputMapper;
-import mil.nga.giat.geowave.accumulo.mapreduce.dedupe.GeoWaveDedupeJobRunner;
-import mil.nga.giat.geowave.accumulo.mapreduce.input.GeoWaveInputFormat;
-import mil.nga.giat.geowave.accumulo.mapreduce.input.GeoWaveInputKey;
-import mil.nga.giat.geowave.accumulo.metadata.AccumuloAdapterStore;
-import mil.nga.giat.geowave.accumulo.metadata.AccumuloDataStatisticsStore;
-import mil.nga.giat.geowave.accumulo.metadata.AccumuloIndexStore;
-import mil.nga.giat.geowave.geotime.IndexType;
-import mil.nga.giat.geowave.index.ByteArrayId;
-import mil.nga.giat.geowave.index.ByteArrayUtils;
-import mil.nga.giat.geowave.store.adapter.DataAdapter;
-import mil.nga.giat.geowave.store.adapter.WritableDataAdapter;
-import mil.nga.giat.geowave.store.index.Index;
-import mil.nga.giat.geowave.store.query.DistributableQuery;
+import mil.nga.giat.geowave.core.geotime.IndexType;
+import mil.nga.giat.geowave.core.index.ByteArrayId;
+import mil.nga.giat.geowave.core.index.ByteArrayUtils;
+import mil.nga.giat.geowave.core.store.adapter.DataAdapter;
+import mil.nga.giat.geowave.core.store.adapter.WritableDataAdapter;
+import mil.nga.giat.geowave.core.store.index.Index;
+import mil.nga.giat.geowave.core.store.query.DistributableQuery;
+import mil.nga.giat.geowave.datastore.accumulo.AccumuloDataStore;
+import mil.nga.giat.geowave.datastore.accumulo.mapreduce.GeoWaveConfiguratorBase;
+import mil.nga.giat.geowave.datastore.accumulo.mapreduce.GeoWaveWritableInputMapper;
+import mil.nga.giat.geowave.datastore.accumulo.mapreduce.dedupe.GeoWaveDedupeJobRunner;
+import mil.nga.giat.geowave.datastore.accumulo.mapreduce.input.GeoWaveInputFormat;
+import mil.nga.giat.geowave.datastore.accumulo.mapreduce.input.GeoWaveInputKey;
+import mil.nga.giat.geowave.datastore.accumulo.metadata.AccumuloAdapterStore;
+import mil.nga.giat.geowave.datastore.accumulo.metadata.AccumuloDataStatisticsStore;
+import mil.nga.giat.geowave.datastore.accumulo.metadata.AccumuloIndexStore;
+import mil.nga.giat.geowave.format.gpx.GpxIngestPlugin;
 import mil.nga.giat.geowave.test.GeoWaveTestEnvironment;
-import mil.nga.giat.geowave.types.gpx.GpxIngestPlugin;
 
 import org.apache.accumulo.core.client.AccumuloException;
 import org.apache.accumulo.core.client.AccumuloSecurityException;
@@ -163,7 +163,7 @@ public class BasicMapReduceIT extends
 				OSM_GPX_INPUT_DIR);
 		final WritableDataAdapter<SimpleFeature>[] adapters = new GpxIngestPlugin().getDataAdapters(null);
 
-		final mil.nga.giat.geowave.store.DataStore geowaveStore = new AccumuloDataStore(
+		final mil.nga.giat.geowave.core.store.DataStore geowaveStore = new AccumuloDataStore(
 				new AccumuloIndexStore(
 						accumuloOperations),
 				new AccumuloAdapterStore(

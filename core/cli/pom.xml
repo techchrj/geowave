@@ -7,7 +7,7 @@
 		<relativePath>../</relativePath>
 		<version>0.8.6-SNAPSHOT</version>
 	</parent>
-	<artifactId>geowave-cli</artifactId>
+	<artifactId>geowave-core-cli</artifactId>
 	<name>GeoWave CLI</name>
 	<description>Command Line Interface for GeoWave Tools</description>
 	<dependencies>
@@ -17,7 +17,7 @@
 		</dependency>
 		<dependency>
 			<groupId>mil.nga.giat</groupId>
-			<artifactId>geowave-index</artifactId>
+			<artifactId>geowave-core-index</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>

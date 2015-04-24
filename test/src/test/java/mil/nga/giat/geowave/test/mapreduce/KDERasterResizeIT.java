@@ -9,13 +9,13 @@ import java.net.URISyntaxException;
 
 import javax.media.jai.Interpolation;
 
-import mil.nga.giat.geowave.accumulo.util.ConnectorPool;
-import mil.nga.giat.geowave.analytics.mapreduce.kde.KDEJobRunner;
-import mil.nga.giat.geowave.geotime.IndexType;
-import mil.nga.giat.geowave.raster.plugin.GeoWaveGTRasterFormat;
-import mil.nga.giat.geowave.raster.plugin.GeoWaveRasterConfig;
-import mil.nga.giat.geowave.raster.plugin.GeoWaveRasterReader;
-import mil.nga.giat.geowave.raster.resize.RasterTileResizeJobRunner;
+import mil.nga.giat.geowave.adapter.raster.plugin.GeoWaveGTRasterFormat;
+import mil.nga.giat.geowave.adapter.raster.plugin.GeoWaveRasterConfig;
+import mil.nga.giat.geowave.adapter.raster.plugin.GeoWaveRasterReader;
+import mil.nga.giat.geowave.adapter.raster.resize.RasterTileResizeJobRunner;
+import mil.nga.giat.geowave.analytic.mapreduce.kde.KDEJobRunner;
+import mil.nga.giat.geowave.core.geotime.IndexType;
+import mil.nga.giat.geowave.datastore.accumulo.util.ConnectorPool;
 import mil.nga.giat.geowave.test.GeoWaveTestEnvironment;
 
 import org.apache.accumulo.core.client.AccumuloException;

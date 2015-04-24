@@ -10,16 +10,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import mil.nga.giat.geowave.accumulo.AccumuloDataStore;
-import mil.nga.giat.geowave.accumulo.AccumuloIndexWriter;
-import mil.nga.giat.geowave.accumulo.BasicAccumuloOperations;
-import mil.nga.giat.geowave.geotime.IndexType;
-import mil.nga.giat.geowave.geotime.store.query.SpatialQuery;
-import mil.nga.giat.geowave.store.CloseableIterator;
-import mil.nga.giat.geowave.store.adapter.WritableDataAdapter;
-import mil.nga.giat.geowave.vector.adapter.FeatureCollectionDataAdapter;
-import mil.nga.giat.geowave.vector.util.FeatureCollectionRedistributor;
-import mil.nga.giat.geowave.vector.util.RedistributeConfig;
+import mil.nga.giat.geowave.adapter.vector.FeatureCollectionDataAdapter;
+import mil.nga.giat.geowave.adapter.vector.util.FeatureCollectionRedistributor;
+import mil.nga.giat.geowave.adapter.vector.util.RedistributeConfig;
+import mil.nga.giat.geowave.core.geotime.IndexType;
+import mil.nga.giat.geowave.core.geotime.store.query.SpatialQuery;
+import mil.nga.giat.geowave.core.store.CloseableIterator;
+import mil.nga.giat.geowave.core.store.adapter.WritableDataAdapter;
+import mil.nga.giat.geowave.datastore.accumulo.AccumuloDataStore;
+import mil.nga.giat.geowave.datastore.accumulo.AccumuloIndexWriter;
+import mil.nga.giat.geowave.datastore.accumulo.BasicAccumuloOperations;
 
 import org.apache.accumulo.core.client.AccumuloException;
 import org.apache.accumulo.core.client.AccumuloSecurityException;

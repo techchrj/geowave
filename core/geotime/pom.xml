@@ -7,7 +7,7 @@
 		<relativePath>../</relativePath>
 		<version>0.8.6-SNAPSHOT</version>
 	</parent>
-	<artifactId>geowave-geotime</artifactId>
+	<artifactId>geowave-core-geotime</artifactId>
 	<name>GeoWave Spatial and Temporal Support</name>
 	<dependencies>
 		<dependency>
@@ -18,10 +18,10 @@
 			a pluggable data store and is no longer a dependency on ingest -->
 		<dependency>
 			<groupId>mil.nga.giat</groupId>
-			<artifactId>geowave-store</artifactId>
+			<artifactId>geowave-core-store</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-		<!-- <dependency> <groupId>mil.nga.giat</groupId> <artifactId>geowave-ingest</artifactId> 
+		<!-- <dependency> <groupId>mil.nga.giat</groupId> <artifactId>geowave-core-ingest</artifactId> 
 			<version>${project.version}</version> </dependency> -->
 		<dependency>
 			<groupId>junit</groupId>

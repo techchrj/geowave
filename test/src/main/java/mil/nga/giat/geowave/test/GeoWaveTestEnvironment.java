@@ -1,12 +1,8 @@
 package mil.nga.giat.geowave.test;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -16,18 +12,15 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TimeZone;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipInputStream;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import mil.nga.giat.geowave.accumulo.AccumuloOperations;
-import mil.nga.giat.geowave.accumulo.BasicAccumuloOperations;
-import mil.nga.giat.geowave.geotime.IndexType;
-import mil.nga.giat.geowave.geotime.store.query.SpatialQuery;
-import mil.nga.giat.geowave.geotime.store.query.SpatialTemporalQuery;
-import mil.nga.giat.geowave.ingest.IngestMain;
-import mil.nga.giat.geowave.store.CloseableIterator;
-import mil.nga.giat.geowave.store.query.DistributableQuery;
+import mil.nga.giat.geowave.core.cli.GeoWaveMain;
+import mil.nga.giat.geowave.core.geotime.IndexType;
+import mil.nga.giat.geowave.core.geotime.store.query.SpatialQuery;
+import mil.nga.giat.geowave.core.geotime.store.query.SpatialTemporalQuery;
+import mil.nga.giat.geowave.core.store.CloseableIterator;
+import mil.nga.giat.geowave.core.store.query.DistributableQuery;
+import mil.nga.giat.geowave.datastore.accumulo.AccumuloOperations;
+import mil.nga.giat.geowave.datastore.accumulo.BasicAccumuloOperations;
 import net.lingala.zip4j.core.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
 
@@ -55,6 +48,8 @@ import org.opengis.feature.simple.SimpleFeature;
 
 import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.Point;
+
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 abstract public class GeoWaveTestEnvironment
 {
@@ -93,9 +88,9 @@ abstract public class GeoWaveTestEnvironment
 		// ingest framework's main method and pre-defined commandline arguments
 		LOGGER.warn("Ingesting '" + ingestFilePath + "' - this may take several minutes...");
 		final String[] args = StringUtils.split(
-				"-localingest -t geotools-vector -b " + ingestFilePath + " -z " + zookeeper + " -i " + accumuloInstance + " -u " + accumuloUser + " -p " + accumuloPassword + " -n " + TEST_NAMESPACE + " -dim " + (indexType.equals(IndexType.SPATIAL_VECTOR) ? "spatial" : "spatial-temporal"),
+				"-localingest -f geotools-vector -b " + ingestFilePath + " -z " + zookeeper + " -i " + accumuloInstance + " -u " + accumuloUser + " -p " + accumuloPassword + " -n " + TEST_NAMESPACE + " -dim " + (indexType.equals(IndexType.SPATIAL_VECTOR) ? "spatial" : "spatial-temporal"),
 				' ');
-		IngestMain.main(args);
+		GeoWaveMain.main(args);
 	}
 
 	@BeforeClass
@@ -460,7 +455,7 @@ abstract public class GeoWaveTestEnvironment
 	/**
 	 * Unzips the contents of a zip file to a target output directory, deleting
 	 * anything that existed beforehand
-	 * 
+	 *
 	 * @param zipInput
 	 *            input zip file
 	 * @param outputFolder
@@ -471,7 +466,7 @@ abstract public class GeoWaveTestEnvironment
 			final String outputFolder ) {
 
 		try {
-			File of = new File(
+			final File of = new File(
 					outputFolder);
 			if (!of.exists()) {
 				if (!of.mkdirs()) {
@@ -482,7 +477,7 @@ abstract public class GeoWaveTestEnvironment
 			else {
 				FileUtil.fullyDelete(of);
 			}
-			ZipFile z = new ZipFile(
+			final ZipFile z = new ZipFile(
 					zipInput);
 			z.extractAll(outputFolder);
 		}
@@ -492,7 +487,7 @@ abstract public class GeoWaveTestEnvironment
 					e);
 			Assert.fail("Unable to extract test data: '" + e.getLocalizedMessage() + "'");
 		}
-		catch (IOException e) {
+		catch (final IOException e) {
 			LOGGER.warn(
 					"Unable to create temporary directory: " + outputFolder,
 					e);

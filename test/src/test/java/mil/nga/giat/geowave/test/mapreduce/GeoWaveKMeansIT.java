@@ -1,29 +1,28 @@
 package mil.nga.giat.geowave.test.mapreduce;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.List;
 
-import mil.nga.giat.geowave.analytics.clustering.CentroidManager;
-import mil.nga.giat.geowave.analytics.clustering.CentroidManagerGeoWave;
-import mil.nga.giat.geowave.analytics.clustering.runners.MultiLevelJumpKMeansClusteringJobRunner;
-import mil.nga.giat.geowave.analytics.clustering.runners.MultiLevelKMeansClusteringJobRunner;
-import mil.nga.giat.geowave.analytics.distance.FeatureCentroidDistanceFn;
-import mil.nga.giat.geowave.analytics.parameters.ClusteringParameters;
-import mil.nga.giat.geowave.analytics.parameters.ExtractParameters;
-import mil.nga.giat.geowave.analytics.parameters.GlobalParameters;
-import mil.nga.giat.geowave.analytics.parameters.JumpParameters;
-import mil.nga.giat.geowave.analytics.parameters.MapReduceParameters;
-import mil.nga.giat.geowave.analytics.parameters.ParameterEnum;
-import mil.nga.giat.geowave.analytics.parameters.SampleParameters;
-import mil.nga.giat.geowave.analytics.tools.AnalyticItemWrapper;
-import mil.nga.giat.geowave.analytics.tools.GeometryDataSetGenerator;
-import mil.nga.giat.geowave.analytics.tools.PropertyManagement;
-import mil.nga.giat.geowave.analytics.tools.SimpleFeatureItemWrapperFactory;
-import mil.nga.giat.geowave.geotime.IndexType;
-import mil.nga.giat.geowave.geotime.store.query.SpatialQuery;
-import mil.nga.giat.geowave.index.sfc.data.NumericRange;
-import mil.nga.giat.geowave.store.query.DistributableQuery;
+import mil.nga.giat.geowave.analytic.AnalyticItemWrapper;
+import mil.nga.giat.geowave.analytic.GeometryDataSetGenerator;
+import mil.nga.giat.geowave.analytic.PropertyManagement;
+import mil.nga.giat.geowave.analytic.SimpleFeatureItemWrapperFactory;
+import mil.nga.giat.geowave.analytic.clustering.CentroidManager;
+import mil.nga.giat.geowave.analytic.clustering.CentroidManagerGeoWave;
+import mil.nga.giat.geowave.analytic.distance.FeatureCentroidDistanceFn;
+import mil.nga.giat.geowave.analytic.mapreduce.clustering.runner.MultiLevelJumpKMeansClusteringJobRunner;
+import mil.nga.giat.geowave.analytic.mapreduce.clustering.runner.MultiLevelKMeansClusteringJobRunner;
+import mil.nga.giat.geowave.analytic.param.ClusteringParameters;
+import mil.nga.giat.geowave.analytic.param.ExtractParameters;
+import mil.nga.giat.geowave.analytic.param.GlobalParameters;
+import mil.nga.giat.geowave.analytic.param.JumpParameters;
+import mil.nga.giat.geowave.analytic.param.MapReduceParameters;
+import mil.nga.giat.geowave.analytic.param.ParameterEnum;
+import mil.nga.giat.geowave.analytic.param.SampleParameters;
+import mil.nga.giat.geowave.core.geotime.IndexType;
+import mil.nga.giat.geowave.core.geotime.store.query.SpatialQuery;
+import mil.nga.giat.geowave.core.index.sfc.data.NumericRange;
+import mil.nga.giat.geowave.core.store.query.DistributableQuery;
 import mil.nga.giat.geowave.test.GeoWaveTestEnvironment;
 
 import org.apache.accumulo.core.client.AccumuloException;
@@ -301,7 +300,9 @@ public class GeoWaveKMeansIT extends
 			final List<AnalyticItemWrapper<SimpleFeature>> centroids = centroidManager.getCentroidsForGroup(grp);
 			final List<AnalyticItemWrapper<SimpleFeature>> hulls = hullManager.getCentroidsForGroup(grp);
 			for (final AnalyticItemWrapper<SimpleFeature> centroid : centroids) {
-				if (centroid.getAssociationCount() == 0) continue;
+				if (centroid.getAssociationCount() == 0) {
+					continue;
+				}
 				Assert.assertTrue(centroid.getGeometry() != null);
 				Assert.assertTrue(centroid.getBatchID() != null);
 				boolean found = false;
