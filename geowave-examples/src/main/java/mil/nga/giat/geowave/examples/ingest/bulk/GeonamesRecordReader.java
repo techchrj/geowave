@@ -15,6 +15,17 @@ import org.opengis.feature.simple.SimpleFeature;
 
 import com.vividsolutions.jts.geom.Coordinate;
 
+/**
+ * GeoNames provides exports by country (see <a
+ * href="http://download.geonames.org/export/dump/"
+ * >http://download.geonames.org/export/dump/</a>). These files contain one
+ * tab-delimited entry per line.<br />
+ * <br />
+ * This class primarily delegates to {@link LineRecordReader}. The
+ * <code>getCurrentValue()</code> method handles the conversion of the line (
+ * <code>Text</code>) value from the Geonames export file into a
+ * {@link SimpleFeature}
+ */
 public class GeonamesRecordReader extends
 		RecordReader<LongWritable, SimpleFeature>
 {

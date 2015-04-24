@@ -21,7 +21,6 @@ import org.opengis.feature.simple.SimpleFeature;
 
 public class BulkIngestMapper extends
 		Mapper<LongWritable, SimpleFeature, Key, Value>
-// FIXME key, value input types!
 {
 	private WritableDataAdapter<SimpleFeature> adapter = new FeatureDataAdapter(
 			GeonamesSimpleFeatureType.getInstance());
