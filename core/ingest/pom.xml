@@ -9,7 +9,7 @@
 		<version>0.8.6-SNAPSHOT</version>
 	</parent>
 	<artifactId>geowave-core-ingest</artifactId>
-	<name>ingest</name>
+	<name>GeoWave Ingest Framework</name>
 	<dependencies>
 		<dependency>
 			<groupId>org.geotools</groupId>

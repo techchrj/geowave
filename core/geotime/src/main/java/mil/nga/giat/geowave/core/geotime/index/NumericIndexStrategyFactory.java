@@ -13,7 +13,7 @@ public interface NumericIndexStrategyFactory
 {
 	public NumericIndexStrategy createIndexStrategy(
 			DataType dataType );
-	
+
 	public NumericDimensionDefinition[] getFactoryDefinition();
 
 	public static enum DataType {
@@ -129,6 +129,7 @@ public interface NumericIndexStrategyFactory
 							SFCType.HILBERT);
 			}
 		}
+
 		@Override
 		public NumericDimensionDefinition[] getFactoryDefinition() {
 			return SPATIAL_TEMPORAL_DIMENSIONS;

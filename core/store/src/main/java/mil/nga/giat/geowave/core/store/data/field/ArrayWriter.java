@@ -6,7 +6,7 @@ import mil.nga.giat.geowave.core.index.ByteArrayId;
 
 /**
  * This class contains the basic object array writer field types
- *
+ * 
  */
 abstract public class ArrayWriter<RowType, FieldType> implements
 		FieldWriter<RowType, FieldType[]>

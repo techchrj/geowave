@@ -65,11 +65,15 @@ public class GeoTimeReaderWriterTest
 		};
 	}
 
-	public void testGeoTimeReadWrite(){
+	public void testGeoTimeReadWrite() {
 		byte[] value;
 		// test Geometry reader/writer
-		value = FieldUtils.getDefaultWriterForClass(Geometry.class).writeField(geometryExpected);
-		final Geometry geometryActual = FieldUtils.getDefaultReaderForClass(Geometry.class).readField(value);
+		value = FieldUtils.getDefaultWriterForClass(
+				Geometry.class).writeField(
+				geometryExpected);
+		final Geometry geometryActual = FieldUtils.getDefaultReaderForClass(
+				Geometry.class).readField(
+				value);
 		// TODO develop the "equals" test for Geometry
 		Assert.assertEquals(
 				"FAILED test of Geometry reader/writer",
@@ -77,8 +81,12 @@ public class GeoTimeReaderWriterTest
 				geometryActual);
 
 		// test Geometry Array reader/writer
-		value = FieldUtils.getDefaultWriterForClass(Geometry[].class).writeField(geometryArrayExpected);
-		final Geometry[] geometryArrayActual = FieldUtils.getDefaultReaderForClass(Geometry[].class).readField(value);
+		value = FieldUtils.getDefaultWriterForClass(
+				Geometry[].class).writeField(
+				geometryArrayExpected);
+		final Geometry[] geometryArrayActual = FieldUtils.getDefaultReaderForClass(
+				Geometry[].class).readField(
+				value);
 		Assert.assertTrue(
 				"FAILED test of String Array reader/writer",
 				Arrays.deepEquals(
@@ -86,16 +94,24 @@ public class GeoTimeReaderWriterTest
 						geometryArrayActual));
 
 		// test Date reader/writer
-		value = FieldUtils.getDefaultWriterForClass(Date.class).writeField(dateExpected);
-		final Date dateActual = FieldUtils.getDefaultReaderForClass(Date.class).readField(value);
+		value = FieldUtils.getDefaultWriterForClass(
+				Date.class).writeField(
+				dateExpected);
+		final Date dateActual = FieldUtils.getDefaultReaderForClass(
+				Date.class).readField(
+				value);
 		Assert.assertEquals(
 				"FAILED test of Date reader/writer",
 				dateExpected,
 				dateActual);
 
 		// test Date Array reader/writer
-		value = FieldUtils.getDefaultWriterForClass(Date[].class).writeField(dateArrayExpected);
-		final Date[] dateArrayActual = FieldUtils.getDefaultReaderForClass(Date[].class).readField(value);
+		value = FieldUtils.getDefaultWriterForClass(
+				Date[].class).writeField(
+				dateArrayExpected);
+		final Date[] dateArrayActual = FieldUtils.getDefaultReaderForClass(
+				Date[].class).readField(
+				value);
 		Assert.assertTrue(
 				"FAILED test of Date Array reader/writer",
 				Arrays.deepEquals(
@@ -103,16 +119,24 @@ public class GeoTimeReaderWriterTest
 						dateArrayActual));
 
 		// test Calendar reader/writer
-		value = FieldUtils.getDefaultWriterForClass(Calendar.class).writeField(calendarExpected);
-		final Calendar calendarActual = FieldUtils.getDefaultReaderForClass(Calendar.class).readField(value);
+		value = FieldUtils.getDefaultWriterForClass(
+				Calendar.class).writeField(
+				calendarExpected);
+		final Calendar calendarActual = FieldUtils.getDefaultReaderForClass(
+				Calendar.class).readField(
+				value);
 		Assert.assertEquals(
 				"FAILED test of Calendar reader/writer",
 				calendarExpected,
 				calendarActual);
 
 		// test Calendar Array reader/writer
-		value = FieldUtils.getDefaultWriterForClass(Calendar[].class).writeField(calendarArrayExpected);
-		final Calendar[] calendarArrayActual = FieldUtils.getDefaultReaderForClass(Calendar[].class).readField(value);
+		value = FieldUtils.getDefaultWriterForClass(
+				Calendar[].class).writeField(
+				calendarArrayExpected);
+		final Calendar[] calendarArrayActual = FieldUtils.getDefaultReaderForClass(
+				Calendar[].class).readField(
+				value);
 		Assert.assertTrue(
 				"FAILED test of Calendar Array reader/writer",
 				Arrays.deepEquals(

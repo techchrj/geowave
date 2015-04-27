@@ -80,9 +80,9 @@ public class AbstractDataAdapterTest
 		}
 
 		/**
-		 *
+		 * 
 		 * Return the adapter ID
-		 *
+		 * 
 		 * @return a unique identifier for this adapter
 		 */
 		@Override

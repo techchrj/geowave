@@ -49,7 +49,7 @@ public class TimeArrayField extends
 				new FixedSizeObjectArrayWriter(
 						elementField.getWriter()));
 	}
-	
+
 	@Override
 	public boolean isCompatibleDefinition(
 			NumericDimensionDefinition otherDimensionDefinition ) {

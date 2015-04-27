@@ -4,7 +4,7 @@ import mil.nga.giat.geowave.core.index.ByteArrayId;
 
 /**
  * This class contains all of the primitive writer field types supported
- *
+ * 
  */
 public class BasicWriter<RowType, FieldType> implements
 		FieldWriter<RowType, FieldType>

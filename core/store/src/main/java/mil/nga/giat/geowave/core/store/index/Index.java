@@ -19,10 +19,10 @@ public class Index implements
 	protected CommonIndexModel indexModel;
 
 	protected Index() {}
-	
+
 	public Index(
 			final NumericIndexStrategy indexStrategy,
-			final CommonIndexModel indexModel) {
+			final CommonIndexModel indexModel ) {
 		this.indexStrategy = indexStrategy;
 		this.indexModel = indexModel;
 	}

@@ -8,6 +8,7 @@
         <version>0.8.6-SNAPSHOT</version>
     </parent>
     <artifactId>geowave-example</artifactId>
+    <name>GeoWave Examples</name>
     <dependencies>
 		<dependency>
 			<groupId>mil.nga.giat</groupId>

@@ -64,7 +64,7 @@ public class PropertyManagementTest
 					ExtractParameters.Extract.DIMENSION_EXTRACT_CLASS
 				},
 				new Serializable[] {
-					"mil.nga.giat.geowave.analytics.extract.EmptyDimensionExtractor"
+					"mil.nga.giat.geowave.analytic.extract.EmptyDimensionExtractor"
 				});
 
 		assertEquals(
@@ -81,7 +81,7 @@ public class PropertyManagementTest
 					ExtractParameters.Extract.DIMENSION_EXTRACT_CLASS
 				},
 				new Serializable[] {
-					"mil.nga.giat.geowave.analytics.distance.CoordinateCircleDistanceFn"
+					"mil.nga.giat.geowave.analytic.distance.CoordinateCircleDistanceFn"
 				});
 		pm.getPropertyAsClass(ExtractParameters.Extract.DIMENSION_EXTRACT_CLASS);
 	}

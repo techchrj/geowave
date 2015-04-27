@@ -10,7 +10,7 @@ import mil.nga.giat.geowave.core.store.filter.GenericTypeResolver;
 
 /**
  * This class contains the basic array reader field types
- *
+ * 
  */
 public class ArrayReader<FieldType> implements
 		FieldReader<FieldType[]>

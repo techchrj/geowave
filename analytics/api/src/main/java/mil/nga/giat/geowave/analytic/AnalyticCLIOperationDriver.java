@@ -65,8 +65,6 @@ public class AnalyticCLIOperationDriver implements
 				LOGGER.error(
 						"Unable to run analytic job",
 						e);
-
-				System.exit(-1);
 			}
 		}
 	}

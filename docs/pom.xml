@@ -11,7 +11,7 @@
     </parent>
 
     <artifactId>geowave-doc</artifactId>
-    <name>geowave-doc</name>
+    <name>GeoWave Documentation</name>
     <packaging>pom</packaging>
 
     <repositories>

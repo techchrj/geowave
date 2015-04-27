@@ -1,5 +1,6 @@
 package mil.nga.giat.geowave.core.store.data.field;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -14,7 +15,7 @@ import org.slf4j.LoggerFactory;
 /**
  * This class has a set of convenience methods to determine the appropriate
  * field reader and writer for a given field type (Class)
- *
+ * 
  */
 public class FieldUtils
 {

@@ -5,7 +5,7 @@
 	<groupId>mil.nga.giat</groupId>
 	<artifactId>geowave-parent</artifactId>
 	<version>0.8.6-SNAPSHOT</version>
-	<name>geowave-parent</name>
+	<name>GeoWave Parent POM</name>
 	<packaging>pom</packaging>
 	<description>Geowave adds spatio-temporal indexing to accumulo through geotools and geoserver</description>
 	<url>https://github.com/ngageoint/geowave</url>
@@ -581,8 +581,8 @@
 				<dependencies>
 					<dependency>
 						<groupId>mil.nga.giat</groupId>
-						<artifactId>build-tools</artifactId>
-						<version>${project.version}</version>
+						<artifactId>geowave-build-tools</artifactId>
+						<version>1.0</version>
 					</dependency>
 				</dependencies>
 			</plugin>

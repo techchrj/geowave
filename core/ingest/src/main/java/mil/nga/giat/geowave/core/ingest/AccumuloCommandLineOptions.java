@@ -26,7 +26,7 @@ import org.slf4j.LoggerFactory;
  * setting up GeoWave to appropriately connect to Accumulo. This class also can
  * perform the function of clearing data for a namespace if that option is
  * activated.
- *
+ * 
  */
 public class AccumuloCommandLineOptions
 {

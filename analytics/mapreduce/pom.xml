@@ -8,6 +8,7 @@
 		<version>0.8.6-SNAPSHOT</version>
 	</parent>
 	<artifactId>geowave-analytic-mapreduce</artifactId>
+	<name>GeoWave MapReduce Analytics</name>
 	<dependencies>
 		<dependency>
 			<groupId>mil.nga.giat</groupId>

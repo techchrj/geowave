@@ -29,7 +29,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
  * of ingest type plugins and using them to drive an ingestion process. The
  * class is sub-classed to perform the specific ingestion required based on the
  * operation set by the user.
- *
+ * 
  */
 abstract public class AbstractIngestCommandLineDriver implements
 		CLIOperationDriver

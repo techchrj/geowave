@@ -7,6 +7,7 @@ import org.apache.accumulo.minicluster.MiniAccumuloCluster;
 import org.apache.accumulo.minicluster.MiniAccumuloConfig;
 // @formatter:off
 /*if_not[ACCUMULO_1.5.2]
+import org.apache.accumulo.core.conf.Property;
 import org.apache.accumulo.minicluster.impl.MiniAccumuloClusterImpl;
 import org.apache.accumulo.minicluster.impl.MiniAccumuloConfigImpl;
 import org.apache.accumulo.monitor.Monitor;
@@ -27,12 +28,13 @@ public class GeoWaveDemoApp
 				Level.WARN);
 
 		final boolean interactive = (System.getProperty("interactive") != null) ? Boolean.parseBoolean(System.getProperty("interactive")) : true;
-		final String instanceName = (System.getProperty("instanceName") != null) ? System.getProperty("instanceName") : "geowave";
+
 		final String password = (System.getProperty("password") != null) ? System.getProperty("password") : "password";
 
 		final File tempDir = Files.createTempDir();
 		// @formatter:off
 		/*if_not[ACCUMULO_1.5.2]
+		final String instanceName = (System.getProperty("instanceName") != null) ? System.getProperty("instanceName") : "geowave";
 		final MiniAccumuloConfigImpl miniAccumuloConfig = new MiniAccumuloConfigImpl(
 				tempDir,
 				password).setNumTservers(

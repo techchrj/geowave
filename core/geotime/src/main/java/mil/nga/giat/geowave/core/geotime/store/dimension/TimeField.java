@@ -19,7 +19,7 @@ import mil.nga.giat.geowave.core.store.dimension.DimensionField;
 /**
  * This field definition can be used for temporal data (either as a time range
  * or a single instant in time).
- *
+ * 
  */
 public class TimeField implements
 		DimensionField<Time>
