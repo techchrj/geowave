@@ -25,7 +25,7 @@ before_install:
   - chmod +x .utility/maven-coveralls-hack.sh
   - chmod +x .utility/changelog-generator.sh
   - .utility/maven-coveralls-hack.sh
-  - build-tools/mvn clean install
+  - cd build-tools;mvn clean install;cd ..
 after_success:
   - .utility/changelog-generator.sh
   - .utility/push-javadoc-to-gh-pages.sh
