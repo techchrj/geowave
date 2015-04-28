@@ -1,32 +1,41 @@
-package mil.nga.giat.geowave.analytic.tools;
+package mil.nga.giat.geowave.analytic.kryo;
 
 import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 import java.util.UUID;
 
-import mil.nga.giat.geowave.analytic.extract.SimpleFeatureCentroidExtractor;
+import mil.nga.giat.geowave.analytic.kryo.FeatureSerializer;
 
 import org.geotools.data.DataUtilities;
 import org.geotools.feature.SchemaException;
 import org.geotools.feature.simple.SimpleFeatureBuilder;
+import org.geotools.feature.simple.SimpleFeatureImpl;
 import org.junit.Test;
 import org.opengis.feature.simple.SimpleFeature;
 import org.opengis.feature.simple.SimpleFeatureType;
 import org.opengis.feature.type.AttributeDescriptor;
 
+import com.esotericsoftware.kryo.Kryo;
+import com.esotericsoftware.kryo.io.Input;
+import com.esotericsoftware.kryo.io.InputChunked;
+import com.esotericsoftware.kryo.io.Output;
+import com.esotericsoftware.kryo.io.OutputChunked;
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.GeometryFactory;
-import com.vividsolutions.jts.geom.Point;
 
-public class SimpleFeatureCentroidExractorTest
+public class FeatureSerializationTest
 {
-
-	SimpleFeatureCentroidExtractor extractor = new SimpleFeatureCentroidExtractor();
 
 	@Test
 	public void test()
 			throws SchemaException {
+		Kryo kryo = new Kryo();
+
+		kryo.register(
+				SimpleFeatureImpl.class,
+				new FeatureSerializer());
+
 		SimpleFeatureType schema = DataUtilities.createType(
 				"testGeo",
 				"location:Point:srid=4326,name:String");
@@ -48,10 +57,22 @@ public class SimpleFeatureCentroidExractorTest
 				geoFactory.createPoint(new Coordinate(
 						-45,
 						45)));
-
-		Point point = extractor.getCentroid(feature);
+		Output output = new OutputChunked();
+		kryo.getSerializer(
+				SimpleFeatureImpl.class).write(
+				kryo,
+				output,
+				feature);
+		Input input = new InputChunked();
+		input.setBuffer(output.getBuffer());
+		SimpleFeature f2 = (SimpleFeature) kryo.getSerializer(
+				SimpleFeatureImpl.class).read(
+				kryo,
+				input,
+				SimpleFeatureImpl.class);
 		assertEquals(
-				4326,
-				point.getSRID());
+				feature,
+				f2);
+
 	}
 }

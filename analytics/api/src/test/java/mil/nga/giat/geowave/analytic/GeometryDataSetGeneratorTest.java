@@ -1,4 +1,4 @@
-package mil.nga.giat.geowave.analytic.tools;
+package mil.nga.giat.geowave.analytic;
 
 import static org.junit.Assert.assertEquals;
 import mil.nga.giat.geowave.analytic.GeometryDataSetGenerator;

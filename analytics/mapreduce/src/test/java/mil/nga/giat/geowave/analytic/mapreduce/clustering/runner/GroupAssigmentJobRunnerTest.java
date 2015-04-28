@@ -26,7 +26,7 @@ import mil.nga.giat.geowave.analytic.param.CentroidParameters;
 import mil.nga.giat.geowave.analytic.param.CommonParameters;
 import mil.nga.giat.geowave.analytic.param.GlobalParameters;
 import mil.nga.giat.geowave.analytic.param.MapReduceParameters.MRConfig;
-import mil.nga.giat.geowave.analytic.tools.partitioners.FeatureDataAdapterStoreFactory;
+import mil.nga.giat.geowave.analytic.partitioner.FeatureDataAdapterStoreFactory;
 
 import org.apache.commons.cli.Option;
 import org.apache.hadoop.conf.Configuration;

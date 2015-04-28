@@ -129,6 +129,7 @@ public class TemporalBinningStrategy implements
 				binSizeMillis *= 31;
 				break;
 			case DAY:
+				break;
 		}
 		return binSizeMillis;
 

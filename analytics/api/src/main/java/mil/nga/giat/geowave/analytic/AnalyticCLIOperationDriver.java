@@ -53,7 +53,7 @@ public class AnalyticCLIOperationDriver implements
 				args);
 		if (commandLine.hasOption("h")) {
 			printHelp(options);
-			System.exit(0);
+			return;
 		}
 		else {
 			final PropertyManagement pm = new PropertyManagement();
@@ -65,6 +65,7 @@ public class AnalyticCLIOperationDriver implements
 				LOGGER.error(
 						"Unable to run analytic job",
 						e);
+				return;
 			}
 		}
 	}

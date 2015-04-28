@@ -3,7 +3,6 @@ package mil.nga.giat.geowave.format.gpx;
 import mil.nga.giat.geowave.adapter.vector.ingest.AbstractSimpleFeatureIngestPlugin;
 import mil.nga.giat.geowave.adapter.vector.ingest.AbstractSimpleFeatureIngestType;
 
-
 /**
  * This represents an ingest type plugin provider for GPX data. It will support
  * ingesting directly from a local file system or staging data from a local

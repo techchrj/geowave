@@ -42,8 +42,8 @@ import com.vividsolutions.jts.geom.Point;
  * @formatter:off Context configuration parameters include:
  *                <p/>
  *                "KMeansDistortionMapReduce.Common.DistanceFunctionClass" ->
- *                {@link mil.nga.giat.geowave.analytic.distance.DistanceFn}
- *                used to determine distance to centroid
+ *                {@link mil.nga.giat.geowave.analytic.distance.DistanceFn} used
+ *                to determine distance to centroid
  *                <p/>
  *                "KMeansDistortionMapReduce.Centroid.WrapperFactoryClass" ->
  *                {@link AnalyticItemWrapperFactory} to extract wrap spatial

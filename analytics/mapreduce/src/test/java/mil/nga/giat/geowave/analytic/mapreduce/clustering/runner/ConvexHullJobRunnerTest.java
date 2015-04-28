@@ -28,8 +28,8 @@ import mil.nga.giat.geowave.analytic.param.HullParameters;
 import mil.nga.giat.geowave.analytic.param.InputParameters;
 import mil.nga.giat.geowave.analytic.param.MapReduceParameters;
 import mil.nga.giat.geowave.analytic.param.MapReduceParameters.MRConfig;
-import mil.nga.giat.geowave.analytic.tools.partitioners.FeatureDataAdapterStoreFactory;
-import mil.nga.giat.geowave.analytic.tools.partitioners.MemoryIndexStoreFactory;
+import mil.nga.giat.geowave.analytic.partitioner.FeatureDataAdapterStoreFactory;
+import mil.nga.giat.geowave.analytic.partitioner.MemoryIndexStoreFactory;
 import mil.nga.giat.geowave.core.index.ByteArrayId;
 
 import org.apache.commons.cli.Option;

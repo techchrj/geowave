@@ -1,4 +1,4 @@
-package mil.nga.giat.geowave.analytic.tools.partitioners;
+package mil.nga.giat.geowave.analytic.partitioner;
 
 import mil.nga.giat.geowave.adapter.vector.FeatureDataAdapter;
 import mil.nga.giat.geowave.analytic.ConfigurationWrapper;

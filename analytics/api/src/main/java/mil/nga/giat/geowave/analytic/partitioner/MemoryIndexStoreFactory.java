@@ -1,4 +1,4 @@
-package mil.nga.giat.geowave.analytic.tools.partitioners;
+package mil.nga.giat.geowave.analytic.partitioner;
 
 import mil.nga.giat.geowave.analytic.ConfigurationWrapper;
 import mil.nga.giat.geowave.analytic.db.IndexStoreFactory;

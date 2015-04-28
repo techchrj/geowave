@@ -1,4 +1,4 @@
-package mil.nga.giat.geowave.analytic.tools.partitioners;
+package mil.nga.giat.geowave.analytic.partitioner;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;

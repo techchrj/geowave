@@ -60,8 +60,7 @@ public class LongCentroid implements
 			final int count ) {
 		super();
 		this.groupID = groupID;
-		this.val = new Long(
-				val);
+		this.val = Long.valueOf(val);
 		this.count = count;
 	}
 
