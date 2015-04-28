@@ -188,7 +188,7 @@ abstract public class AbstractIngestCommandLineDriver implements
 			final Options options ) {
 		final List<IngestFormatPluginProviderSpi<?, ?>> selectedPluginProviders = new ArrayList<IngestFormatPluginProviderSpi<?, ?>>();
 		final String[] pluginProviderNames = commandLine.getOptionValue(
-				"t").split(
+				"f").split(
 				",");
 		for (final String pluginProviderName : pluginProviderNames) {
 			final IngestFormatPluginProviderSpi<?, ?> pluginProvider = pluginProviderRegistry.get(pluginProviderName);
