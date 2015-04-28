@@ -16,17 +16,12 @@
 	<dependencies>
 		<dependency>
 			<groupId>mil.nga.giat</groupId>
-			<artifactId>geowave-vector</artifactId>
+			<artifactId>geowave-adapter-vector</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>mil.nga.giat</groupId>
-			<artifactId>geowave-raster</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>mil.nga.giat</groupId>
-			<artifactId>geowave-utils</artifactId>
+			<artifactId>geowave-adapter-raster</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 	</dependencies>
@@ -484,7 +479,7 @@
 								</goals>
 								<configuration>
 									<inputHeaders>
-										<path>${project.build.directory}/../jace/</path>
+										<path>${basedir}/jace/</path>
 									</inputHeaders>
 									<inputSources>
 									</inputSources>
@@ -516,7 +511,7 @@
 								</goals>
 								<configuration>
 									<target name="copy-patch-files">
-										<copy file="${project.build.directory}/../jace/CMakeLists.txt"
+										<copy file="${basedir}/jace/CMakeLists.txt"
 											tofile="${project.build.directory}/dependency/jace/CMakeLists.txt" />
 									</target>
 								</configuration>
