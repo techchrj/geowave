@@ -1,7 +1,7 @@
 {
 	"type" : "record",
 	"name" : "HdfsFile",
-	"namespace" : "mil.nga.giat.geowave.ingest.hdfs",
+	"namespace" : "mil.nga.giat.geowave.core.ingest.hdfs",
 		"fields" : [{
 				"name" : "originalFile",
 				"type" : "bytes",
