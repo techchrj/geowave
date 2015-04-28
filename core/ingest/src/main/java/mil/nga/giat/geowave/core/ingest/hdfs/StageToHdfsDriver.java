@@ -86,18 +86,18 @@ public class StageToHdfsDriver extends
 				stageToHdfsPlugin = pluginProvider.getStageToHdfsPlugin();
 
 				if (stageToHdfsPlugin == null) {
-					LOGGER.warn("Plugin provider for ingest type '" + pluginProvider.getIngestTypeName() + "' does not support staging to HDFS");
+					LOGGER.warn("Plugin provider for ingest type '" + pluginProvider.getIngestFormatName() + "' does not support staging to HDFS");
 					continue;
 				}
 			}
 			catch (final UnsupportedOperationException e) {
 				LOGGER.warn(
-						"Plugin provider '" + pluginProvider.getIngestTypeName() + "' does not support staging to HDFS",
+						"Plugin provider '" + pluginProvider.getIngestFormatName() + "' does not support staging to HDFS",
 						e);
 				continue;
 			}
 			stageToHdfsPlugins.put(
-					pluginProvider.getIngestTypeName(),
+					pluginProvider.getIngestFormatName(),
 					stageToHdfsPlugin);
 		}
 		final Configuration conf = new Configuration();

@@ -8,7 +8,7 @@ import mil.nga.giat.geowave.core.ingest.local.LocalFileIngestPlugin;
 
 import org.opengis.feature.simple.SimpleFeature;
 
-abstract public class AbstractSimpleFeatureIngestType<I> implements
+abstract public class AbstractSimpleFeatureIngestFormat<I> implements
 		IngestFormatPluginProviderSpi<I, SimpleFeature>
 {
 	protected final CQLFilterOptionProvider cqlFilterOptionProvider = new CQLFilterOptionProvider();
@@ -40,7 +40,7 @@ abstract public class AbstractSimpleFeatureIngestType<I> implements
 	}
 
 	@Override
-	public IngestFormatOptionProvider getIngestTypeOptionProvider() {
+	public IngestFormatOptionProvider getIngestFormatOptionProvider() {
 		return cqlFilterOptionProvider;
 	}
 

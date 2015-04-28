@@ -9,11 +9,11 @@ import mil.nga.giat.geowave.core.ingest.local.LocalFileIngestPlugin;
 import org.opengis.coverage.grid.GridCoverage;
 
 /**
- * This represents an ingest type plugin provider for GeoTools grid coverage
+ * This represents an ingest format plugin provider for GeoTools grid coverage
  * (raster) formats. It currently only supports ingesting data directly from a
  * local file system into GeoWave.
  */
-public class GeoToolsRasterDataStoreIngestType implements
+public class GeoToolsRasterDataStoreIngestFormat implements
 		IngestFormatPluginProviderSpi<Object, GridCoverage>
 {
 
@@ -40,17 +40,17 @@ public class GeoToolsRasterDataStoreIngestType implements
 	}
 
 	@Override
-	public String getIngestTypeName() {
+	public String getIngestFormatName() {
 		return "geotools-raster";
 	}
 
 	@Override
-	public String getIngestTypeDescription() {
+	public String getIngestFormatDescription() {
 		return "all file-based raster formats supported within geotools";
 	}
 
 	@Override
-	public IngestFormatOptionProvider getIngestTypeOptionProvider() {
+	public IngestFormatOptionProvider getIngestFormatOptionProvider() {
 		// no custom options are provided
 		return null;
 	}

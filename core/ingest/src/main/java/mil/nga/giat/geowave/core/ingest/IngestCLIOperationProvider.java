@@ -51,6 +51,8 @@ public class IngestCLIOperationProvider implements
 
 	private static final CLIOperationCategory CATEGORY = new IngestOperationCategory();
 
+	public IngestCLIOperationProvider() {}
+
 	@Override
 	public CLIOperation[] getOperations() {
 		return INGEST_OPERATIONS;

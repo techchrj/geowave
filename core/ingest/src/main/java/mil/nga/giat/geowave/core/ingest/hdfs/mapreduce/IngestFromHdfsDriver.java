@@ -74,9 +74,9 @@ public class IngestFromHdfsDriver extends
 				// HDFS path safe in case there are invalid characters
 				final Path inputFile = new Path(
 						hdfsBaseDirectory,
-						pluginProvider.getIngestTypeName());
+						pluginProvider.getIngestFormatName());
 				if (!fs.exists(inputFile)) {
-					LOGGER.warn("HDFS file '" + inputFile + "' does not exist for ingest type '" + pluginProvider.getIngestTypeName() + "'");
+					LOGGER.warn("HDFS file '" + inputFile + "' does not exist for ingest type '" + pluginProvider.getIngestFormatName() + "'");
 					continue;
 				}
 				IngestFromHdfsPlugin ingestFromHdfsPlugin = null;
@@ -84,17 +84,17 @@ public class IngestFromHdfsDriver extends
 					ingestFromHdfsPlugin = pluginProvider.getIngestFromHdfsPlugin();
 
 					if (ingestFromHdfsPlugin == null) {
-						LOGGER.warn("Plugin provider for ingest type '" + pluginProvider.getIngestTypeName() + "' does not support ingest from HDFS");
+						LOGGER.warn("Plugin provider for ingest type '" + pluginProvider.getIngestFormatName() + "' does not support ingest from HDFS");
 						continue;
 					}
 					if (!accumuloOptions.isSupported(ingestFromHdfsPlugin.getSupportedIndices())) {
-						LOGGER.warn("HDFS file ingest plugin for ingest type '" + pluginProvider.getIngestTypeName() + "' does not support dimensionality '" + accumuloOptions.getDimensionalityType() + "'");
+						LOGGER.warn("HDFS file ingest plugin for ingest type '" + pluginProvider.getIngestFormatName() + "' does not support dimensionality '" + accumuloOptions.getDimensionalityType() + "'");
 						continue;
 					}
 				}
 				catch (final UnsupportedOperationException e) {
 					LOGGER.warn(
-							"Plugin provider '" + pluginProvider.getIngestTypeName() + "' does not support ingest from HDFS",
+							"Plugin provider '" + pluginProvider.getIngestFormatName() + "' does not support ingest from HDFS",
 							e);
 					continue;
 				}
@@ -107,7 +107,7 @@ public class IngestFromHdfsDriver extends
 				if (ingestFromHdfsPlugin.isUseReducerPreferred()) {
 					ingestWithReducer = ingestFromHdfsPlugin.ingestWithReducer();
 					if (ingestWithReducer == null) {
-						LOGGER.warn("Plugin provider '" + pluginProvider.getIngestTypeName() + "' prefers ingest with reducer but it is unimplemented");
+						LOGGER.warn("Plugin provider '" + pluginProvider.getIngestFormatName() + "' prefers ingest with reducer but it is unimplemented");
 					}
 				}
 				if (ingestWithReducer == null) {
@@ -117,11 +117,11 @@ public class IngestFromHdfsDriver extends
 
 						ingestWithReducer = ingestFromHdfsPlugin.ingestWithReducer();
 						if (ingestWithReducer == null) {
-							LOGGER.warn("Plugin provider '" + pluginProvider.getIngestTypeName() + "' does not does not support ingest from HDFS");
+							LOGGER.warn("Plugin provider '" + pluginProvider.getIngestFormatName() + "' does not does not support ingest from HDFS");
 							continue;
 						}
 						else {
-							LOGGER.warn("Plugin provider '" + pluginProvider.getIngestTypeName() + "' prefers ingest with mapper but it is unimplemented");
+							LOGGER.warn("Plugin provider '" + pluginProvider.getIngestFormatName() + "' prefers ingest with mapper but it is unimplemented");
 						}
 					}
 				}
@@ -131,7 +131,7 @@ public class IngestFromHdfsDriver extends
 					jobRunner = new IngestWithReducerJobRunner(
 							accumuloOptions,
 							inputFile,
-							pluginProvider.getIngestTypeName(),
+							pluginProvider.getIngestFormatName(),
 							ingestFromHdfsPlugin,
 							ingestWithReducer);
 
@@ -140,7 +140,7 @@ public class IngestFromHdfsDriver extends
 					jobRunner = new IngestWithMapperJobRunner(
 							accumuloOptions,
 							inputFile,
-							pluginProvider.getIngestTypeName(),
+							pluginProvider.getIngestFormatName(),
 							ingestFromHdfsPlugin,
 							ingestWithMapper);
 

@@ -26,7 +26,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 /**
  * This implements a generic command-line driven utility for discovering a set
- * of ingest type plugins and using them to drive an ingestion process. The
+ * of ingest format plugins and using them to drive an ingestion process. The
  * class is sub-classed to perform the specific ingestion required based on the
  * operation set by the user.
  * 
@@ -52,20 +52,20 @@ abstract public class AbstractIngestCommandLineDriver implements
 		while (pluginProviders.hasNext()) {
 			final IngestFormatPluginProviderSpi pluginProvider = pluginProviders.next();
 			pluginProviderRegistry.put(
-					cleanIngestTypeName(pluginProvider.getIngestTypeName()),
+					cleanIngestFormatName(pluginProvider.getIngestFormatName()),
 					pluginProvider);
 		}
 	}
 
-	private static String cleanIngestTypeName(
-			String ingestTypeName ) {
-		ingestTypeName = ingestTypeName.trim().toLowerCase().replaceAll(
+	private static String cleanIngestFormatName(
+			String ingestFormatName ) {
+		ingestFormatName = ingestFormatName.trim().toLowerCase().replaceAll(
 				" ",
 				"_");
-		ingestTypeName = ingestTypeName.replaceAll(
+		ingestFormatName = ingestFormatName.replaceAll(
 				",",
 				"");
-		return ingestTypeName;
+		return ingestFormatName;
 	}
 
 	@Override
@@ -94,12 +94,12 @@ abstract public class AbstractIngestCommandLineDriver implements
 				"l",
 				"list",
 				false,
-				"List the available ingest types"));
+				"List the available ingest formats"));
 		baseOptionGroup.addOption(new Option(
 				"f",
 				"formats",
 				true,
-				"Explicitly set the ingest formats by name (or multiple comma-delimited types), if not set all available ingest types will be used"));
+				"Explicitly set the ingest formats by name (or multiple comma-delimited formats), if not set all available ingest formats will be used"));
 		options.addOptionGroup(baseOptionGroup);
 		applyOptionsInternal(options);
 		final int optionCount = options.getOptions().size();
@@ -120,10 +120,10 @@ abstract public class AbstractIngestCommandLineDriver implements
 						new OutputStreamWriter(
 								System.out,
 								StringUtils.UTF8_CHAR_SET));
-				pw.println("Available ingest types currently registered as plugins:\n");
+				pw.println("Available ingest formats currently registered as plugins:\n");
 				for (final Entry<String, IngestFormatPluginProviderSpi<?, ?>> pluginProviderEntry : pluginProviderRegistry.entrySet()) {
 					final IngestFormatPluginProviderSpi<?, ?> pluginProvider = pluginProviderEntry.getValue();
-					final String desc = pluginProvider.getIngestTypeDescription() == null ? "no description" : pluginProvider.getIngestTypeDescription();
+					final String desc = pluginProvider.getIngestFormatDescription() == null ? "no description" : pluginProvider.getIngestFormatDescription();
 					final String text = pluginProviderEntry.getKey() + ":\n" + desc;
 
 					formatter.printWrapped(
@@ -152,7 +152,7 @@ abstract public class AbstractIngestCommandLineDriver implements
 			else {
 				selectedPluginProviders.addAll(pluginProviderRegistry.values());
 				if (selectedPluginProviders.isEmpty()) {
-					LOGGER.fatal("There were no ingest type plugin providers found");
+					LOGGER.fatal("There were no ingest format plugin providers found");
 					System.exit(-3);
 				}
 			}
@@ -163,7 +163,7 @@ abstract public class AbstractIngestCommandLineDriver implements
 						options,
 						args);
 				for (final IngestFormatPluginProviderSpi<?, ?> plugin : selectedPluginProviders) {
-					final IngestFormatOptionProvider optionProvider = plugin.getIngestTypeOptionProvider();
+					final IngestFormatOptionProvider optionProvider = plugin.getIngestFormatOptionProvider();
 					if (optionProvider != null) {
 						optionProvider.parseOptions(commandLine);
 					}
@@ -194,16 +194,16 @@ abstract public class AbstractIngestCommandLineDriver implements
 			final IngestFormatPluginProviderSpi<?, ?> pluginProvider = pluginProviderRegistry.get(pluginProviderName);
 			if (pluginProvider == null) {
 				throw new IllegalArgumentException(
-						"Unable to find SPI plugin provider for ingest type '" + pluginProviderName + "'");
+						"Unable to find SPI plugin provider for ingest format '" + pluginProviderName + "'");
 			}
 			selectedPluginProviders.add(pluginProvider);
 		}
 		if (selectedPluginProviders.isEmpty()) {
 			throw new IllegalArgumentException(
-					"There were no ingest type plugin providers found");
+					"There were no ingest format plugin providers found");
 		}
 		for (final IngestFormatPluginProviderSpi<?, ?> plugin : selectedPluginProviders) {
-			final IngestFormatOptionProvider optionProvider = plugin.getIngestTypeOptionProvider();
+			final IngestFormatOptionProvider optionProvider = plugin.getIngestFormatOptionProvider();
 			if (optionProvider != null) {
 				optionProvider.applyOptions(options);
 			}

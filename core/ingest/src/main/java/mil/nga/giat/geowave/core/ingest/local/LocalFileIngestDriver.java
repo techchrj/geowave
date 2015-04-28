@@ -70,23 +70,23 @@ public class LocalFileIngestDriver extends
 				localFileIngestPlugin = pluginProvider.getLocalFileIngestPlugin();
 
 				if (localFileIngestPlugin == null) {
-					LOGGER.warn("Plugin provider for ingest type '" + pluginProvider.getIngestTypeName() + "' does not support local file ingest");
+					LOGGER.warn("Plugin provider for ingest type '" + pluginProvider.getIngestFormatName() + "' does not support local file ingest");
 					continue;
 				}
 			}
 			catch (final UnsupportedOperationException e) {
 				LOGGER.warn(
-						"Plugin provider '" + pluginProvider.getIngestTypeName() + "' does not support local file ingest",
+						"Plugin provider '" + pluginProvider.getIngestFormatName() + "' does not support local file ingest",
 						e);
 				continue;
 			}
 			final boolean indexSupported = (accumulo.getIndex(localFileIngestPlugin.getSupportedIndices()) != null);
 			if (!indexSupported) {
-				LOGGER.warn("Local file ingest plugin for ingest type '" + pluginProvider.getIngestTypeName() + "' does not support dimensionality type '" + accumulo.getDimensionalityType() + "'");
+				LOGGER.warn("Local file ingest plugin for ingest type '" + pluginProvider.getIngestFormatName() + "' does not support dimensionality type '" + accumulo.getDimensionalityType() + "'");
 				continue;
 			}
 			localFileIngestPlugins.put(
-					pluginProvider.getIngestTypeName(),
+					pluginProvider.getIngestFormatName(),
 					localFileIngestPlugin);
 			adapters.addAll(Arrays.asList(localFileIngestPlugin.getDataAdapters(accumulo.getVisibility())));
 		}

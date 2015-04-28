@@ -6,8 +6,8 @@ import mil.nga.giat.geowave.core.ingest.local.LocalFileIngestPlugin;
 
 /**
  * This interface can be injected and automatically discovered using SPI to
- * provide a new ingest type to the GeoWave ingestion framework. It is not
- * required that a new ingest type implement all of the plugins. However, each
+ * provide a new ingest format to the GeoWave ingestion framework. It is not
+ * required that a new ingest format implement all of the plugins. However, each
  * plugin directly corresponds to a user selected operation and only the plugins
  * that are supported will result in usable operations.
  * 
@@ -57,30 +57,31 @@ public interface IngestFormatPluginProviderSpi<I, O>
 			throws UnsupportedOperationException;
 
 	/**
-	 * This will represent the name for the type that is registered with the
-	 * ingest framework and presented as a data type option via the commandline.
-	 * For consistency, this name is preferably lower-case and without spaces,
-	 * and should uniquely identify the data type as much as possible.
+	 * This will represent the name for the format that is registered with the
+	 * ingest framework and presented as a data format option via the
+	 * commandline. For consistency, this name is preferably lower-case and
+	 * without spaces, and should uniquely identify the data format as much as
+	 * possible.
 	 * 
-	 * @return The name that will be associated with this type
+	 * @return The name that will be associated with this format
 	 */
-	public String getIngestTypeName();
+	public String getIngestFormatName();
 
 	/**
 	 * This is a means for a plugin to provide custom command-line options. If
 	 * this is null, there will be no custom options added.
 	 * 
 	 * 
-	 * @return The ingest type's option provider or null for no custom options
+	 * @return The ingest format's option provider or null for no custom options
 	 */
-	public IngestFormatOptionProvider getIngestTypeOptionProvider();
+	public IngestFormatOptionProvider getIngestFormatOptionProvider();
 
 	/**
-	 * This is a user-friendly full description of the data type that this
+	 * This is a user-friendly full description of the data format that this
 	 * plugin provider supports. It will be presented to the command-line user
-	 * as help when the registered data types are listed.
+	 * as help when the registered data formats are listed.
 	 * 
-	 * @return The user-friendly full description for this data type
+	 * @return The user-friendly full description for this data format
 	 */
-	public String getIngestTypeDescription();
+	public String getIngestFormatDescription();
 }
