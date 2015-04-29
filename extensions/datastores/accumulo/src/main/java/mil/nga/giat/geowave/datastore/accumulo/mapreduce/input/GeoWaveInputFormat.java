@@ -448,7 +448,6 @@ public class GeoWaveInputFormat<T> extends
 			final Map<String, Map<KeyExtent, List<Range>>> tserverBinnedRanges = new HashMap<String, Map<KeyExtent, List<Range>>>();
 			TabletLocator tl;
 			try {
-
 				final Instance instance = getInstance(context);
 				final String tableId = Tables.getTableId(
 						instance,
