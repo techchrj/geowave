@@ -24,7 +24,7 @@ import org.opengis.feature.simple.SimpleFeature;
 
 import com.vividsolutions.jts.geom.Coordinate;
 
-public class BulkIngestMapper extends
+public class SimpleFeatureToAccumuloKeyValueMapper extends
 		Mapper<LongWritable, Text, Key, Value>
 {
 	private WritableDataAdapter<SimpleFeature> adapter = new FeatureDataAdapter(

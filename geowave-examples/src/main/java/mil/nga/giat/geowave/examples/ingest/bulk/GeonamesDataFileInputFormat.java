@@ -16,7 +16,7 @@ import org.apache.hadoop.mapreduce.lib.input.LineRecordReader;
  * >http://download.geonames.org/export/dump/</a>). These files contain one
  * tab-delimited entry per line.
  */
-public class GeonamesExportFileInputFormat extends
+public class GeonamesDataFileInputFormat extends
 		FileInputFormat<LongWritable, Text>
 {
 	@Override
