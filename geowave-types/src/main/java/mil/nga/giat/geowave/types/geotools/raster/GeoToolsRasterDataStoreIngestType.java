@@ -4,6 +4,7 @@ import mil.nga.giat.geowave.ingest.IngestTypeOptionProvider;
 import mil.nga.giat.geowave.ingest.IngestTypePluginProviderSpi;
 import mil.nga.giat.geowave.ingest.hdfs.StageToHdfsPlugin;
 import mil.nga.giat.geowave.ingest.hdfs.mapreduce.IngestFromHdfsPlugin;
+import mil.nga.giat.geowave.ingest.kafka.StageToKafkaPlugin;
 import mil.nga.giat.geowave.ingest.local.LocalFileIngestPlugin;
 
 import org.opengis.coverage.grid.GridCoverage;
@@ -52,6 +53,13 @@ public class GeoToolsRasterDataStoreIngestType implements
 	@Override
 	public IngestTypeOptionProvider getIngestTypeOptionProvider() {
 		// no custom options are provided
+		return null;
+	}
+
+	@Override
+	public StageToKafkaPlugin<Object> getStageToKafkaPlugin()
+			throws UnsupportedOperationException {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

@@ -4,6 +4,7 @@ import mil.nga.giat.geowave.ingest.IngestTypeOptionProvider;
 import mil.nga.giat.geowave.ingest.IngestTypePluginProviderSpi;
 import mil.nga.giat.geowave.ingest.hdfs.StageToHdfsPlugin;
 import mil.nga.giat.geowave.ingest.hdfs.mapreduce.IngestFromHdfsPlugin;
+import mil.nga.giat.geowave.ingest.kafka.StageToKafkaPlugin;
 import mil.nga.giat.geowave.ingest.local.LocalFileIngestPlugin;
 
 import org.opengis.feature.simple.SimpleFeature;
@@ -26,6 +27,11 @@ abstract public class AbstractSimpleFeatureIngestType<I> implements
 
 	@Override
 	public StageToHdfsPlugin<I> getStageToHdfsPlugin() {
+		return getInstance();
+	}
+	
+	@Override
+	public StageToKafkaPlugin<I> getStageToKafkaPlugin() {
 		return getInstance();
 	}
 

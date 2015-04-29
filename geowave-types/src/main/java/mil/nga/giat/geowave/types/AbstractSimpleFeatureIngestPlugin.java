@@ -9,14 +9,13 @@ import mil.nga.giat.geowave.accumulo.util.CloseableIteratorWrapper;
 import mil.nga.giat.geowave.index.ByteArrayId;
 import mil.nga.giat.geowave.index.Persistable;
 import mil.nga.giat.geowave.ingest.GeoWaveData;
-import mil.nga.giat.geowave.ingest.hdfs.HdfsFile;
 import mil.nga.giat.geowave.ingest.hdfs.StageToHdfsPlugin;
 import mil.nga.giat.geowave.ingest.hdfs.mapreduce.IngestFromHdfsPlugin;
 import mil.nga.giat.geowave.ingest.hdfs.mapreduce.IngestWithMapper;
+import mil.nga.giat.geowave.ingest.kafka.StageToKafkaPlugin;
 import mil.nga.giat.geowave.ingest.local.LocalFileIngestPlugin;
 import mil.nga.giat.geowave.store.CloseableIterator;
 import mil.nga.giat.geowave.store.adapter.WritableDataAdapter;
-import mil.nga.giat.geowave.types.geolife.GeoLifeIngestPlugin;
 
 import org.opengis.feature.simple.SimpleFeature;
 
@@ -27,6 +26,7 @@ abstract public class AbstractSimpleFeatureIngestPlugin<I> implements
 		LocalFileIngestPlugin<SimpleFeature>,
 		IngestFromHdfsPlugin<I, SimpleFeature>,
 		StageToHdfsPlugin<I>,
+		StageToKafkaPlugin<I>,
 		Persistable
 {
 	protected CQLFilterOptionProvider filterProvider = new CQLFilterOptionProvider();

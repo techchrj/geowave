@@ -28,6 +28,7 @@ import mil.nga.giat.geowave.store.index.Index;
 import mil.nga.giat.geowave.store.index.IndexType;
 import mil.nga.giat.geowave.types.AbstractSimpleFeatureIngestPlugin;
 import mil.nga.giat.geowave.types.CQLFilterOptionProvider;
+import mil.nga.giat.geowave.types.gpx.GpxTrack;
 import mil.nga.giat.geowave.vector.adapter.FeatureDataAdapter;
 
 import org.apache.avro.Schema;
@@ -122,6 +123,12 @@ public class GeoLifeIngestPlugin extends
 	@Override
 	public Schema getAvroSchemaForHdfsType() {
 		return HdfsFile.getClassSchema();
+	}
+	
+	@Override
+	public HdfsFile toAvroObject(
+			final File input ) {
+		return toHdfsObjects(input)[0];
 	}
 
 	@Override

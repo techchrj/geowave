@@ -2,6 +2,7 @@ package mil.nga.giat.geowave.ingest;
 
 import mil.nga.giat.geowave.ingest.hdfs.StageToHdfsPlugin;
 import mil.nga.giat.geowave.ingest.hdfs.mapreduce.IngestFromHdfsPlugin;
+import mil.nga.giat.geowave.ingest.kafka.StageToKafkaPlugin;
 import mil.nga.giat.geowave.ingest.local.LocalFileIngestPlugin;
 
 /**
@@ -28,6 +29,9 @@ public interface IngestTypePluginProviderSpi<I, O>
 	 *             ingesting using map-reduce will not be supported)
 	 */
 	public StageToHdfsPlugin<I> getStageToHdfsPlugin()
+			throws UnsupportedOperationException;
+
+	public StageToKafkaPlugin<I> getStageToKafkaPlugin()
 			throws UnsupportedOperationException;
 
 	/**
