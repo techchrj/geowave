@@ -26,10 +26,10 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class BulkIngestInputGenerationTest
+public class BulkIngestInputGenerationIT
 {
-	private static final Logger LOGGER = Logger.getLogger(BulkIngestInputGenerationTest.class);
-	private static final String TEST_DATA_LOCATION = "src/test/resources/mil/nga/giat/geowave/test/geonames";
+	private static final Logger LOGGER = Logger.getLogger(BulkIngestInputGenerationIT.class);
+	private static final String TEST_DATA_LOCATION = "src/test/resources/mil/nga/giat/geowave/test/geonames/data/barbados";
 	private static final long NUM_GEONAMES_RECORDS = 834; // (see BB.txt)
 	private static final String OUTPUT_PATH = "target/tmp_bulkIngestTest";
 	private static long mapInputRecords;
@@ -58,11 +58,26 @@ public class BulkIngestInputGenerationTest
 				exitCode,
 				0);
 
-		verifyJobOutput();
-
 		verifyNumInputRecords();
 
 		verifyNumAccumuloKeyValuePairs();
+
+		verifyJobOutput();
+	}
+
+	private void verifyNumInputRecords() {
+		Assert.assertEquals(
+				mapInputRecords,
+				NUM_GEONAMES_RECORDS);
+	}
+
+	private void verifyNumAccumuloKeyValuePairs() {
+		final int accumuloEntriesPerKey = 4; // FeatureDataAdapter creates 4
+												// Accumulo entries per
+												// SimpleFeature
+		Assert.assertEquals(
+				mapOutputRecords,
+				(NUM_GEONAMES_RECORDS * accumuloEntriesPerKey));
 	}
 
 	private void verifyJobOutput()
@@ -103,26 +118,11 @@ public class BulkIngestInputGenerationTest
 				true);
 	}
 
-	private void verifyNumInputRecords() {
-		Assert.assertEquals(
-				mapInputRecords,
-				NUM_GEONAMES_RECORDS);
-	}
-
-	private void verifyNumAccumuloKeyValuePairs() {
-		final int accumuloEntriesPerKey = 4; // FeatureDataAdapter creates 4
-												// Accumulo entries per
-												// SimpleFeature
-		Assert.assertEquals(
-				mapOutputRecords,
-				(NUM_GEONAMES_RECORDS * accumuloEntriesPerKey));
-	}
-
 	private static class BulkIngestInputGenerationJobRunner extends
 			Configured implements
 			Tool
 	{
-		private static final String JOB_NAME = "BulkIngestInputGenerationTestJob";
+		private static final String JOB_NAME = "BulkIngestInputGenerationITJob";
 		private static final String TASK_COUNTER_GROUP_NAME = "org.apache.hadoop.mapreduce.TaskCounter";
 		private static final String MAP_INPUT_RECORDS = "MAP_INPUT_RECORDS";
 		private static final String MAP_OUTPUT_RECORDS = "MAP_OUTPUT_RECORDS";
