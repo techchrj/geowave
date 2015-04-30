@@ -10,6 +10,8 @@ import mil.nga.giat.geowave.analytic.db.IndexStoreFactory;
 import mil.nga.giat.geowave.analytic.distance.DistanceFn;
 import mil.nga.giat.geowave.analytic.extract.DimensionExtractor;
 import mil.nga.giat.geowave.analytic.model.IndexModelBuilder;
+import mil.nga.giat.geowave.analytics.tools.dbops.IndexStoreFactory;
+import mil.nga.giat.geowave.analytics.tools.model.IndexModelBuilder;
 
 import org.apache.commons.cli.Option;
 
